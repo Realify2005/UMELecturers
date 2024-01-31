@@ -29,10 +29,8 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_URL}/api/login`, credentials);
-            const { token } = response.data;
-            localStorage.setItem('token', token);
-            navigate('/');
+            await axios.post(`${API_URL}/api/login`, credentials);
+            navigate('/home');
         } catch (error) {
             console.log(error);
             setError('Invalid username or password');

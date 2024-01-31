@@ -29,9 +29,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/api/signup`, credentials);
-      const { token } = response.data;
-      localStorage.setItem('token', token);
+      await axios.post(`${API_URL}/api/signup`, credentials);
       navigate('/login');
     } catch (error) {
       console.error('Signup failed:', error);

@@ -2,33 +2,52 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-  const { username, password } = req.body;
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ username: username });
+      const match = await bcrypt.compare(password, user.password);
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      };
+      if (!match) {
+        return done(null, false, { message: "Incorrect password" });
+      };
+      console.log("match");
+      return done(null, user);
+    } catch(err) {
+      return done(err);
+    };
+  })
+);
 
-  try {
-    // Find the user by username
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Validate the password
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return res.status(401).json({ message: 'Invalid password' });
-    }
-
-    // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, 'secret', { expiresIn: '1h' });
-
-    res.json({ token });
-  } catch (error) {
-    console.error('Login failed:', error);
-    res.status(500).json({ message: 'Server Error' });
-  }
+passport.serializeUser((user, done) => {
+  done(null, user.id);
 });
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch(err) {
+    done(err);
+  };
+});
+
+router.post('/',
+
+  passport.authenticate("local", {
+    successRedirect: "/home",
+    failureRedirect: "/login"
+  })
+
+
+);
 
 module.exports = router;
