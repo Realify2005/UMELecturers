@@ -9,12 +9,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const LocalStrategy = require('passport-local').Strategy;
+const flash = require('express-flash');
+const User = require('./models/User');
+const bcrypt = require('bcryptjs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
-var validateTokenRouter = require('./routes/validate-token');
+var userDataRouter = require('./routes/user-data');
 
 var app = express();
 
@@ -34,16 +37,48 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(flash());
+app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/signup', signupRouter);
-app.use('/api/validate-token', validateTokenRouter);
+app.use('/api/user-data', userDataRouter);
 
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ username: username });
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      };
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
+        return done(null, false, { message: "Incorrect password" });
+      };
+      return done(null, user);
+    } catch(err) {
+      return done(err);
+    };
+  })
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch(err) {
+    done(err);
+  };
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

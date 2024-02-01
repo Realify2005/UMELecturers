@@ -8,46 +8,19 @@ const session = require('express-session');
 
 const router = express.Router();
 
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await User.findOne({ username: username });
-      const match = await bcrypt.compare(password, user.password);
-      if (!user) {
-        return done(null, false, { message: "Incorrect username" });
-      };
-      if (!match) {
-        return done(null, false, { message: "Incorrect password" });
-      };
-      console.log("match");
-      return done(null, user);
-    } catch(err) {
-      return done(err);
-    };
-  })
-);
+router.post('/', (req, res, next) => {
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+  passport.authenticate("local", (err, user, info) => {
+    if (!user) {
+      return res.status(401).json({ message: info });
+    }
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    return res.status(200).json({ user });
+  })(req, res, next);
+
+
 });
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch(err) {
-    done(err);
-  };
-});
-
-router.post('/',
-
-  passport.authenticate("local", {
-    successRedirect: "/home",
-    failureRedirect: "/login"
-  })
-
-
-);
 
 module.exports = router;

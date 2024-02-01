@@ -19,7 +19,7 @@ const Login = () => {
         }
     }, [])
 
-    const [error, setError] = useState('');
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -32,8 +32,8 @@ const Login = () => {
             await axios.post(`${API_URL}/api/login`, credentials);
             navigate('/home');
         } catch (error) {
-            console.log(error);
-            setError('Invalid username or password');
+            const errorMessage = JSON.parse(error.request.response).message.message
+            setError(errorMessage);
         }
     }
 

@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/home.css';
+
+const API_URL = 'http://localhost:3000'
 
 const Home = () => {
     const navigate = useNavigate();
+    const [user, setUser] = useState('');
 
     useEffect(() => {
-        const validateToken = async () => {
+        const fetchData = async () => {
             try {
-                // Send the token to your backend for validation
-                const response = await axios.post('/api/validate-token', {
-                    token: localStorage.getItem('token')
-                });
-                if (!response.data.valid) {
-                    // Token is invalid, redirect to login page
-                    navigate('/login');
-                }
+                // Make a request to a protected backend route
+                const response = await axios.get(`${API_URL}/api/user-data`);
+                console.log("RESPONSE IS ", response);
+                setUser(response.data.user);
             } catch (error) {
-                console.error('Token validation failed:', error);
+                console.error('Failed to fetch user data:', error);
                 // Handle error (e.g., redirect to login page)
                 navigate('/login');
             }
         };
 
-        validateToken();
+        fetchData();
     }, [navigate]);
 
     return (
         <>
             <h1>Main Menu</h1>
+            <h2>Hello, {user}</h2>
         </>
     );
 };
