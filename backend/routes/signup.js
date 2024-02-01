@@ -8,14 +8,11 @@ const router = express.Router();
 // Sign-up route
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
-  console.log(username);
-  console.log(password);
-
   try {
     // Check if user with the same email already exists
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ message: 'User with this username already exists' });
+      return res.status(400).json({ message: 'User with this username already exists. Please choose a different username' });
     }
 
     // Hash the password
@@ -24,9 +21,6 @@ router.post('/', async (req, res) => {
     // Create new user
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
-
-    // Generate JWT token
-    const token = jwt.sign({ userId: newUser._id }, 'secret', { expiresIn: '1h' });
 
     res.status(201).json({ token });
   } catch (error) {

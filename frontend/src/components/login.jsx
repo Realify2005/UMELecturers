@@ -29,11 +29,12 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${API_URL}/api/login`, credentials);
+            const response = await axios.post(`${API_URL}/api/login`, credentials);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('username', response.data.username.username);
             navigate('/home');
         } catch (error) {
-            const errorMessage = JSON.parse(error.request.response).message.message
-            setError(errorMessage);
+            setError(error.response.data.message);
         }
     }
 

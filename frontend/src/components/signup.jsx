@@ -32,8 +32,7 @@ const Signup = () => {
       await axios.post(`${API_URL}/api/signup`, credentials);
       navigate('/login');
     } catch (error) {
-      console.error('Signup failed:', error);
-      setError('Failed to sign up'); // Display error message to the user
+      setError(error.response.data.message); // Display error message to the user
     }
   };
 
