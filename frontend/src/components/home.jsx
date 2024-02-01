@@ -26,7 +26,6 @@ const Home = () => {
                 });
 
                 const username = localStorage.getItem('username');
-                console.log(username);
 
                 setUser(username);
             } catch (error) {
@@ -43,6 +42,7 @@ const Home = () => {
         <>
             <h1>Main Menu</h1>
             {user && <h2>Hello, {user}</h2>}
+            <a href="logout">Logout</a>
         </>
     );
 };
