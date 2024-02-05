@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from './sidebar'
+import '../styles/home.module.css'
 
 const API_URL = 'http://localhost:3000';
 
@@ -16,7 +18,7 @@ const Home = () => {
 
                 if (!token) {
                     // If token is not present, redirect to login
-                    navigate('/login');
+                    navigate('/login?status=Unauthorized');
                     return;
                 }
 
@@ -40,9 +42,15 @@ const Home = () => {
 
     return (
         <>
-            <h1>Main Menu</h1>
-            {user && <h2>Hello, {user}</h2>}
-            <a href="logout">Logout</a>
+            <Sidebar />
+            <div className="header">
+                {user && <h2>Hello, {user}</h2>}
+                <Link to="/logout">Logout</Link>
+                <Link to="/home/add-staff">Add Staff</Link>
+            </div>
+            <div className="main-content">
+                <Outlet />
+            </div>
         </>
     );
 };

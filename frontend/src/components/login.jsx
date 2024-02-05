@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/login.css'
 
 const API_URL = 'http://localhost:3000'
@@ -20,7 +20,19 @@ const Login = () => {
     }, [])
 
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const statusMessage = searchParams.get('status');
+        if (statusMessage === 'Unauthorized') {
+            setError('Please login to continue')
+        } else if (statusMessage === 'logoutSuccess') {
+            setSuccess('Log out Successful')
+        }
+    }, [location]);
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value});
@@ -51,6 +63,7 @@ const Login = () => {
                 <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
             </div>
             {error && <div className="error">{error}</div>}
+            {success && <div className="success">{success}</div>}
             <button type="submit">Login</button>
             </form>
             <p>Don't have an account? <a href='signup'>Sign up</a> instead!</p>

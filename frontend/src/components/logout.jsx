@@ -10,7 +10,7 @@ const Logout = () => {
     localStorage.removeItem('username');
 
     // Redirect to the login page
-    navigate('/login');
+    navigate('/login?status=logoutSuccess');
   }, [navigate]);
 
   return null; // This component doesn't render anything, it just handles logout logic

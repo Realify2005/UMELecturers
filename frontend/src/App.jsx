@@ -4,6 +4,7 @@ import Logout from "./components/logout"
 import Signup from "./components/signup"
 import Welcome from "./components/welcome"
 import Home from "./components/home"
+import AddStaff from "./components/addStaff"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -25,7 +26,13 @@ const App = () => {
     },
     {
       path: "/home",
-      element: <Home />
+      element: <Home />,
+      children: [
+        {
+          path: "add-staff",
+          element: <AddStaff />
+        }
+      ]
     }
   ])
   

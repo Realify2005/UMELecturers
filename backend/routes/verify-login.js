@@ -30,7 +30,6 @@ const verifyToken = (req, res, next) => {
 // Protected route to retrieve user data
 router.get('/', verifyToken, (req, res) => {
   // If authenticated, send back user data
-  console.log(req);
   res.status(200).json({ user: req.user });
 });
 
