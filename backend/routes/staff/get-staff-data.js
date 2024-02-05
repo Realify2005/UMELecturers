@@ -1,34 +1,31 @@
+// routes/most-rated-tutors.js
+
 const express = require('express');
 const router = express.Router();
 const Staff = require('../../models/Staff');
 
-// Placeholder route handler
+// Route handler to fetch the most rated tutors
 router.get('/', async (req, res) => {
   try {
     const mostRatedTutors = await Staff.aggregate([
-      {
-        $match: {
-          type: 'tutor'
-        }
-      },
-      {
+      { 
         $group: {
-          _id: '$name',
+          _id: '$rating',
           count: { $sum: 1 }
         }
       },
       {
-        $sort: { count: -1 }
+        $sort: { _id: -1 }
       },
       {
         $limit: 3
       }
     ]);
 
-    res.status(200).json(mostRatedTutors)
+    res.status(200).json(mostRatedTutors);
   } catch (error) {
     console.error('Error fetching most rated tutors: ', error);
-    res.status(500).json({ error: 'Error getting most rated tutors data '});
+    res.status(500).json({ error: 'Error getting most rated tutors data' });
   }
 });
 

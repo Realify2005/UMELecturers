@@ -22,6 +22,8 @@ router.post('/', async (req, res) => {
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
 
+    const token = jwt.sign({ userId: newUser._id }, 'secret', { expiresIn: '1h' });
+
     res.status(201).json({ token });
   } catch (error) {
     console.error('Sign-up failed:', error);

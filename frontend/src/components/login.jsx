@@ -47,6 +47,7 @@ const Login = () => {
             navigate('/home');
         } catch (error) {
             setError(error.response.data.message);
+            setSuccess('');
         }
     }
 

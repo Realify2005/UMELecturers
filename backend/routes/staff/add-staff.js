@@ -1,5 +1,5 @@
 const express = require('express');
-const Staff = require('../models/Staff');
+const Staff = require('../../models/Staff');
 
 const router = express.Router();
 
@@ -8,12 +8,6 @@ router.post('/', async (req, res) => {
     const { type, name, rating, course, year, review } = req.body;
     
     try {
-        // Check if staff already exists
-        const existingStaff = await Staff.findOne({ name });
-        if (existingStaff) {
-            return res.status(400).json({ message: 'Staff with this name already exists. Please choose a different name.' });
-        }
-        
         // Create new staff
         const newStaff = new Staff({ type, name, rating, course, year, review });
         await newStaff.save();

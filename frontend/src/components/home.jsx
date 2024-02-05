@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './sidebar'
-import '../styles/home.module.css'
+import '../styles/home.css'
 
 const API_URL = 'http://localhost:3000';
 
@@ -41,7 +41,7 @@ const Home = () => {
     }, [navigate]);
 
     return (
-        <>
+        <div className="home">
             <Sidebar />
             <div className="header">
                 {user && <h2>Hello, {user}</h2>}
@@ -51,7 +51,7 @@ const Home = () => {
             <div className="main-content">
                 <Outlet />
             </div>
-        </>
+        </div>
     );
 };
 

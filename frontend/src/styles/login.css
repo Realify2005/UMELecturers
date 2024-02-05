@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: lightgreen !important;
+    height: 100vh;
 }
 
 .login-container {
