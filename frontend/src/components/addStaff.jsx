@@ -43,7 +43,7 @@ const AddStaff = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_URL}/api/add-staff`, staffData);
+            const response = await axios.post(`${API_URL}/api/add-staff-data`, staffData);
             console.log('Staff added successfully:', response.data);
             setStaffData({
                 type: 'lecturer',

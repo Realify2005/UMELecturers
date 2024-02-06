@@ -126,9 +126,7 @@ router.get('/most-rated-tutors', async (req, res) => {
 router.post('/staff-page', async (req, res) => {
   try {
     const staffNameHyphened = req.body.staffNameHyphened;
-    console.log(req.body);
     const staffData = await Staff.find({ nameHyphened: staffNameHyphened });
-    console.log("finding staffname", staffNameHyphened);
 
     if (!staffData || staffData.length === 0) {
       return res.status(404).json({error: "notFound"});
@@ -144,7 +142,6 @@ router.post('/staff-page', async (req, res) => {
 
 router.post("/search-staff", async(req, res) => {
   try {
-    console.log(req.body);
     const searchTerm = req.body.searchTerm.toLowerCase();
     const searchResults = await Staff.aggregate([
       {

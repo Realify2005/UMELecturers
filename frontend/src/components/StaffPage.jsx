@@ -9,9 +9,9 @@ const StaffPage = () => {
     const staffName = useRef(null);
     const { staffNameHyphened } = useParams();
     const navigate = useNavigate();
-
     const [staffData, setStaffData] = useState(null);
     const [error, setError] = useState(null);
+    const [username, setUsername] = useState(localStorage.getItem('username'));
 
     const handleClick = () => {
         navigate('/home/add-staff');
@@ -19,6 +19,25 @@ const StaffPage = () => {
 
     const addComment = () => {
         navigate(`/home/add-staff?staff=${staffName.current}`)
+    }
+
+    const handleEdit = (commentId) => {
+        console.log(`Editing comment with ID: ${commentId}`);
+    }
+
+    const handleDelete = async (commentId) => {
+        try {
+            const confirmDelete = window.confirm('Are you sure you want to delete this comment?');
+            if (!confirmDelete) return;
+
+            await axios.delete(`${API_URL}/api/edit-staff-data/delete-comment`, {
+                data: { commentId: commentId, username: username }
+            });
+            setStaffData(prevData => prevData.filter(comment => comment._id != commentId));
+            console.log(`Deleted comment with ID: ${commentId}`);
+        } catch (error) {
+            console.error('Error deleting comment: ', error);
+        }
     }
 
     useEffect(() => {
@@ -62,6 +81,12 @@ const StaffPage = () => {
                             <p>Rating: {data.rating}/10</p>
                             <p>Comment: {data.review}</p>
                             <p>Reviewed by {data.reviewer}</p>
+                            {data.reviewer === username && (
+                            <>
+                                <button onClick={() => handleEdit(data._id)}>Edit</button>
+                                <button onClick={() => handleDelete(data._id)}>Delete</button>
+                            </>
+                            )}
                         </div>
                     )
                 })}

@@ -20,8 +20,9 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/auth/login');
 var signupRouter = require('./routes/auth/signup');
 var verifyLoginRouter = require('./routes/verify-login');
-var addStaffRouter = require('./routes/staff/add-staff');
-var getStaffDataRouter = require('./routes/staff/get-staff-data')
+var addStaffRouter = require('./routes/staff/add-staff-data');
+var getStaffDataRouter = require('./routes/staff/get-staff-data');
+var editStaffDataRouter = require('./routes/staff/edit-staff-data');
 
 var app = express();
 
@@ -51,8 +52,9 @@ app.use('/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/verify-login', verifyLoginRouter);
-app.use('/api/add-staff', addStaffRouter);
+app.use('/api/add-staff-data', addStaffRouter);
 app.use('/api/get-staff-data', getStaffDataRouter)
+app.use('/api/edit-staff-data', editStaffDataRouter);
 
 // passport.use(
 //   new LocalStrategy(async (username, password, done) => {

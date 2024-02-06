@@ -1,6 +1,5 @@
 const express = require('express');
 const Staff = require('../../models/Staff');
-
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -8,7 +7,7 @@ router.post('/', async (req, res) => {
     const { type, name, nameHyphened, rating, course, year, review, reviewer } = req.body;
     
     try {
-        // Create new staff
+        // Create new staff data
         const newStaff = new Staff({ type, name, nameHyphened, rating, course, year, review, reviewer });
         await newStaff.save();
 
