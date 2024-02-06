@@ -17,6 +17,10 @@ const StaffPage = () => {
         navigate('/home/add-staff');
     }
 
+    const addComment = () => {
+        navigate(`/home/add-staff?staff=${staffName.current}`)
+    }
+
     useEffect(() => {
         const fetchStaffData = async () => {
             try {
@@ -62,6 +66,7 @@ const StaffPage = () => {
                     )
                 })}
             </div>
+            <button onClick={addComment}>Add Comment</button>
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import '../styles/signup.css'
 
 const API_URL = 'http://localhost:3000'
@@ -51,7 +51,7 @@ const Signup = () => {
         {error && <div className="error">{error}</div>}
         <button type="submit">Sign Up</button>
       </form>
-      <p>Already have an account? <a href='login'>Log in</a> instead!</p>
+      <p>Already have an account? <Link to='login'>Log in</Link> instead!</p>
     </div>
   );
 };

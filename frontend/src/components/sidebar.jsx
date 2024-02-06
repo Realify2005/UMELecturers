@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:3000'
@@ -44,7 +45,7 @@ const Sidebar = () => {
                         {mostRatedLecturers.map(lecturer => {
                             return (
                                 <li key={lecturer.name}>
-                                    <a href={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</a> - {lecturer.count} ratings
+                                    <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.count} ratings
                                 </li>
                             )
                         })}
@@ -58,7 +59,7 @@ const Sidebar = () => {
                         {highestRatedLecturers.map(lecturer => {
                             return (
                                 <li key={lecturer.name}>
-                                    <a href={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</a> - {lecturer.averageRating}/10
+                                    <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.averageRating}/10
                                 </li>
                             )
                         })}
@@ -72,7 +73,7 @@ const Sidebar = () => {
                         {mostRatedTutors.map(tutor => {
                             return (
                                 <li key={tutor.name}>
-                                    <a href={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</a> - {tutor.count} ratings
+                                    <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.count} ratings
                                 </li>
                             )
                         })}
@@ -81,12 +82,12 @@ const Sidebar = () => {
             </div>
             <div className="section">
                 <h2>
-                    Most Rated Tutors:
+                    Highest Rated Tutors:
                     <ol>
                         {highestRatedTutors.map(tutor => {
                             return (
                                 <li key={tutor.name}>
-                                    <a href={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</a> - {tutor.averageRating}/10
+                                    <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.averageRating}/10
                                 </li>
                             )
                         })}

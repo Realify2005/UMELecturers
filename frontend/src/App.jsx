@@ -7,6 +7,7 @@ import Home from "./components/Home"
 import AddStaff from "./components/AddStaff"
 import StaffPage from "./components/StaffPage"
 import ErrorPage from "./components/ErrorPage"
+import SearchResults from "./components/SearchResults"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const App = () => {
         {
           path: "staff/:staffNameHyphened",
           element: <StaffPage />
+        },
+        {
+          path: "search",
+          element: <SearchResults />
         }
       ]
     }

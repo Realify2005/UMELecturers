@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const API_URL = 'http://localhost:3000'
 
 const AddStaff = () => {
+    const navigate = useNavigate();
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const prefilledStaffName = searchParams.has('staff') ? searchParams.get('staff') : '';
+
     const [staffData, setStaffData] = useState({
         type: 'lecturer',
-        name: '',
-        nameHyphened: '',
+        name: prefilledStaffName,
+        nameHyphened: prefilledStaffName.toLowerCase().split(' ').join('-'),
         rating: 5,
         course: '',
         year: '',
@@ -40,13 +47,14 @@ const AddStaff = () => {
             console.log('Staff added successfully:', response.data);
             setStaffData({
                 type: 'lecturer',
-                name: '',
-                nameHyphened: '',
+                name: prefilledStaffName,
+                nameHyphened: prefilledStaffName.toLowerCase().split(' ').join('-'),
                 rating: 5,
                 course: '',
                 year: '',
                 review: ''
             })
+            navigate(`/home/staff/${staffData.nameHyphened}`);
         } catch (error) {
             console.log('Failed to add staff:', error)
         }
@@ -54,7 +62,7 @@ const AddStaff = () => {
 
     return (
         <div className="add-staff">
-            <h2>Add New Staff</h2>
+            <h2>Add New Staff/Comment</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Type:</label>
@@ -94,7 +102,7 @@ const AddStaff = () => {
                     <label>Review:</label>
                     <textarea name="review" value={staffData.review} onChange={handleChange} required />
                 </div>
-                <button type="submit">Add Staff</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     )

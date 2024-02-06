@@ -142,4 +142,28 @@ router.post('/staff-page', async (req, res) => {
   }
 })
 
+router.post("/search-staff", async(req, res) => {
+  try {
+    console.log(req.body);
+    const searchTerm = req.body.searchTerm.toLowerCase();
+    const searchResults = await Staff.aggregate([
+      {
+        $match: { name: { $regex: searchTerm, $options: "i" } }
+      },
+      {
+        $group: {
+          _id: "$name",
+          name: { $first: "$name" },
+          nameHyphened: { $first: "$nameHyphened" }
+          // Add other fields you want to include in the response
+        }
+      }
+    ]);
+    res.status(200).json(searchResults);
+  } catch (error) {
+    console.error('Error searching staff: ', error);
+    res.status(500).json({ error: "Error searching staff "});
+  }
+})
+
 module.exports = router;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate, Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
-import Sidebar from './Sidebar'
-import '../styles/home.css'
-import StaffPage from './StaffPage'
+import Sidebar from './Sidebar';
+import '../styles/home.css';
+import Search from './Search';
 
 const API_URL = 'http://localhost:3000';
 
@@ -48,6 +48,7 @@ const Home = () => {
                 {user && <h2>Hello, {user}</h2>}
                 <Link to="/logout">Logout</Link>
                 <Link to="/home/add-staff">Add Staff</Link>
+                <Search />
             </div>
             <div className="main-content">
                 <Outlet />

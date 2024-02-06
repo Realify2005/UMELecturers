@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import '../styles/login.css'
 
 const API_URL = 'http://localhost:3000'
@@ -67,7 +67,7 @@ const Login = () => {
             {success && <div className="success">{success}</div>}
             <button type="submit">Login</button>
             </form>
-            <p>Don't have an account? <a href='signup'>Sign up</a> instead!</p>
+            <p>Don't have an account? <Link to='signup'>Sign up</Link> instead!</p>
         </div>
     )
 }
