@@ -7,15 +7,30 @@ const AddStaff = () => {
     const [staffData, setStaffData] = useState({
         type: 'lecturer',
         name: '',
+        nameHyphened: '',
         rating: 5,
         course: '',
         year: '',
-        review: ''
+        review: '',
+        reviewer: localStorage.getItem('username')
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        name === 'rating' ? setStaffData({ ...staffData, [name]: parseInt(value, 10)}) : setStaffData({ ...staffData, [name]: value});
+        if (name === 'rating') {
+            setStaffData({ ...staffData, [name]: parseInt(value, 10)});
+        } else if (name === 'name') {
+            setStaffData({ 
+                ...staffData, 
+                [name]: value.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+                nameHyphened: value.toLowerCase().split(' ').join('-')
+            });
+        } else if (name === 'course') {
+            const upperCaseValue = value.toUpperCase();
+            setStaffData({ ...staffData, [name]: upperCaseValue });
+        } else {
+            setStaffData({ ...staffData, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -26,6 +41,7 @@ const AddStaff = () => {
             setStaffData({
                 type: 'lecturer',
                 name: '',
+                nameHyphened: '',
                 rating: 5,
                 course: '',
                 year: '',

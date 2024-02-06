@@ -5,11 +5,11 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     console.log(req.body);
-    const { type, name, rating, course, year, review } = req.body;
+    const { type, name, nameHyphened, rating, course, year, review, reviewer } = req.body;
     
     try {
         // Create new staff
-        const newStaff = new Staff({ type, name, rating, course, year, review });
+        const newStaff = new Staff({ type, name, nameHyphened, rating, course, year, review, reviewer });
         await newStaff.save();
 
         // Respond with success

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link, Outlet } from 'react-router-dom';
+import { Route, Routes, useNavigate, Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 import '../styles/home.css'
+import StaffPage from './StaffPage'
 
 const API_URL = 'http://localhost:3000';
 

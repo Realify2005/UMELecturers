@@ -13,19 +13,19 @@ const Sidebar = () => {
         const fetchData = async () => {
             try {
                 // Fetch most popular lecturer
-                const mostRatedLecturersResponse = await axios.get(`${API_URL}/api/most-popular-lecturers`);
+                const mostRatedLecturersResponse = await axios.get(`${API_URL}/api/get-staff-data/most-rated-lecturers`);
                 setMostRatedLecturers(mostRatedLecturersResponse.data);
 
-                // Fetch highest rated lecturer
-                const highestRatedLecturersResponse = await axios.get(`${API_URL}/api/highest-rated-lecturers`);
-                setHighestRatedLecturers(highestRatedLecturersResponse.data);
-
                 // Fetch most popular tutor
-                const mostRatedTutorsResponse = await axios.get(`${API_URL}/api/most-popular-tutors`);
+                const mostRatedTutorsResponse = await axios.get(`${API_URL}/api/get-staff-data/most-rated-tutors`);
                 setMostRatedTutors(mostRatedTutorsResponse.data);
 
+                // Fetch highest rated lecturer
+                const highestRatedLecturersResponse = await axios.get(`${API_URL}/api/get-staff-data/highest-rated-lecturers`);
+                setHighestRatedLecturers(highestRatedLecturersResponse.data);
+
                 // Fetch highest rated tutor
-                const highestRatedTutorsResponse = await axios.get(`${API_URL}/api/highest-rated-tutors`);
+                const highestRatedTutorsResponse = await axios.get(`${API_URL}/api/get-staff-data/highest-rated-tutors`);
                 setHighestRatedTutors(highestRatedTutorsResponse.data);
             } catch (error) {
                 console.error('Failed to fetch data:', error);
@@ -38,16 +38,60 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="section">
-                <h2>Most Popular Lecturers: {mostRatedLecturers}</h2>
+                <h2>
+                    Most Rated Lecturers:
+                    <ol>
+                        {mostRatedLecturers.map(lecturer => {
+                            return (
+                                <li key={lecturer.name}>
+                                    <a href={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</a> - {lecturer.count} ratings
+                                </li>
+                            )
+                        })}
+                    </ol>
+                </h2>
             </div>
             <div className="section">
-                <h2>Highest Rated Lecturers: {highestRatedLecturers}</h2>
+                <h2>
+                    Highest Rated Lecturers:
+                    <ol>
+                        {highestRatedLecturers.map(lecturer => {
+                            return (
+                                <li key={lecturer.name}>
+                                    <a href={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</a> - {lecturer.averageRating}/10
+                                </li>
+                            )
+                        })}
+                    </ol>
+                </h2>
             </div>
             <div className="section">
-                <h2>Most Popular Tutors: {mostRatedTutors}</h2>
+                <h2>
+                    Most Rated Tutors:
+                    <ol>
+                        {mostRatedTutors.map(tutor => {
+                            return (
+                                <li key={tutor.name}>
+                                    <a href={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</a> - {tutor.count} ratings
+                                </li>
+                            )
+                        })}
+                    </ol>
+                </h2>
             </div>
             <div className="section">
-                <h2>Highest Rated Tutors: {highestRatedTutors}</h2>
+                <h2>
+                    Most Rated Tutors:
+                    <ol>
+                        {highestRatedTutors.map(tutor => {
+                            return (
+                                <li key={tutor.name}>
+                                    <a href={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</a> - {tutor.averageRating}/10
+                                </li>
+                            )
+                        })}
+                    </ol>
+                </h2>
             </div>
         </div>
     );

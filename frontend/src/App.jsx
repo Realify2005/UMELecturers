@@ -1,16 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Login from "./components/login"
-import Logout from "./components/logout"
-import Signup from "./components/signup"
-import Welcome from "./components/welcome"
-import Home from "./components/home"
-import AddStaff from "./components/addStaff"
+import Login from "./components/Login"
+import Logout from "./components/Logout"
+import Signup from "./components/Signup"
+import Welcome from "./components/Welcome"
+import Home from "./components/Home"
+import AddStaff from "./components/AddStaff"
+import StaffPage from "./components/StaffPage"
+import ErrorPage from "./components/ErrorPage"
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Welcome />
+      element: <Welcome />,
+      errorElement: <ErrorPage />
     },
     {
       path: "/login",
@@ -31,6 +34,10 @@ const App = () => {
         {
           path: "add-staff",
           element: <AddStaff />
+        },
+        {
+          path: "staff/:staffNameHyphened",
+          element: <StaffPage />
         }
       ]
     }

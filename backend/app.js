@@ -21,10 +21,7 @@ var loginRouter = require('./routes/auth/login');
 var signupRouter = require('./routes/auth/signup');
 var verifyLoginRouter = require('./routes/verify-login');
 var addStaffRouter = require('./routes/staff/add-staff');
-var mostRatedLecturersRouter = require('./routes/sidebar/most-rated-lecturers');
-var mostRatedTutorsRouter = require('./routes/sidebar/most-rated-tutors');
-var highestRatedLecturersRouter = require('./routes/sidebar/highest-rated-lecturers');
-var highestRatedTutorsRouter = require('./routes/sidebar/highest-rated-tutors');
+var getStaffDataRouter = require('./routes/staff/get-staff-data')
 
 var app = express();
 
@@ -48,7 +45,6 @@ app.use(flash());
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -56,10 +52,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/verify-login', verifyLoginRouter);
 app.use('/api/add-staff', addStaffRouter);
-app.use('/api/highest-rated-lecturers', highestRatedLecturersRouter);
-app.use('/api/highest-rated-tutors', highestRatedTutorsRouter);
-app.use('/api/most-rated-lecturers', mostRatedLecturersRouter);
-app.use('/api/most-rated-tutors', mostRatedTutorsRouter);
+app.use('/api/get-staff-data', getStaffDataRouter)
 
 // passport.use(
 //   new LocalStrategy(async (username, password, done) => {
