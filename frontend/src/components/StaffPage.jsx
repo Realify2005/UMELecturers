@@ -1,29 +1,30 @@
-// StaffDetails.js
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/staff-page.css'
+import '../styles/staff-page.css';
 
-const API_URL = "http://localhost:3000"
+const API_URL = "http://localhost:3000";
 
 const StaffPage = () => {
     const staffName = useRef(null);
     const { staffNameHyphened } = useParams();
     const navigate = useNavigate();
-    const [staffData, setStaffData] = useState(null);
+    const [lecturerComments, setLecturerComments] = useState([]);
+    const [tutorComments, setTutorComments] = useState([]);
     const [error, setError] = useState(null);
     const [username, setUsername] = useState(localStorage.getItem('username'));
+    const [loading, setLoading] = useState(true);
 
     const handleClick = () => {
         navigate('/home/add-staff');
     }
 
     const addComment = () => {
-        navigate(`/home/add-staff?staff=${staffName.current}`)
+        navigate(`/home/add-staff?staff=${staffName.current}`);
     }
 
     const handleEdit = (commentId) => {
-        navigate(`/home/edit-staff/${commentId}`)
+        navigate(`/home/edit-staff/${commentId}`);
     }
 
     const handleDelete = async (commentId) => {
@@ -34,7 +35,10 @@ const StaffPage = () => {
             await axios.delete(`${API_URL}/api/edit-staff-data/delete-comment`, {
                 data: { commentId: commentId, username: username }
             });
-            setStaffData(prevData => prevData.filter(comment => comment._id != commentId));
+
+            setLecturerComments(prevComments => prevComments.filter(comment => comment._id !== commentId));
+            setTutorComments(prevComments => prevComments.filter(comment => comment._id !== commentId));
+            
             console.log(`Deleted comment with ID: ${commentId}`);
         } catch (error) {
             console.error('Error deleting comment: ', error);
@@ -47,7 +51,13 @@ const StaffPage = () => {
                 const response = await axios.post(`${API_URL}/api/get-staff-data/staff-page`, {staffNameHyphened: staffNameHyphened});
                 staffName.current = response.data[0].name;
                 console.log(response.data);
-                setStaffData(response.data);
+
+                const lecturerComments = response.data.filter(comment => comment.type === 'lecturer');
+                const tutorComments = response.data.filter(comment => comment.type === 'tutor');
+                setLecturerComments(lecturerComments);
+                setTutorComments(tutorComments);
+
+                setLoading(false); 
             } catch (error) {
                 setError(error);
             }
@@ -58,15 +68,15 @@ const StaffPage = () => {
 
     if (error && error.response.status === 404) {
         return (
-        <div className="no-staff-data">
-            <p>It seems like no one has commented on this staff. Be the first one!</p>
-            <button className="addStaff" onClick={handleClick}>Create Staff</button>
-        </div>    
+            <div className="no-staff-data">
+                <p>It seems like no one has commented on this staff. Be the first one!</p>
+                <button className="addStaff" onClick={handleClick}>Create Staff</button>
+            </div>
         )
     }
 
-    if (!staffData) {
-        return <div>Loading...</div>
+    if (loading) {
+        return <div>Loading...</div>;
     }
 
     return (
@@ -74,24 +84,38 @@ const StaffPage = () => {
             <h1>{staffName.current}</h1>
             <h2>Comments:</h2>
             <div className="comments">
-                {staffData.map(data => {
-                    return (
-                        <div key={data._id} className="comment-box">
-                            <p>Reviewing as {data.type}</p>
-                            <p>Course code: {data.course}</p>
-                            <p>Year Taken: {data.year}</p>
-                            <p>Rating: {data.rating}/10</p>
-                            <p>Comment: {data.review}</p>
-                            <p>Reviewed by {data.reviewer}</p>
-                            {data.reviewer === username && (
+                <h3>As lecturer</h3>
+                {lecturerComments.map(comment => (
+                    <div key={comment._id} className="comment-box">
+                        <p>Course Code: {comment.course}</p>
+                        <p>Year Taken: {comment.year}</p>
+                        <p>Rating: {comment.rating}/10</p>
+                        <p>Reviewer: {comment.reviewer}</p>
+                        <p className="comment-review">{comment.review}</p>
+                        {comment.reviewer === username && (
                             <>
-                                <button onClick={() => handleEdit(data._id)}>Edit</button>
-                                <button onClick={() => handleDelete(data._id)}>Delete</button>
+                                <button onClick={() => handleEdit(comment._id)}>Edit</button>
+                                <button onClick={() => handleDelete(comment._id)}>Delete</button>
                             </>
-                            )}
-                        </div>
-                    )
-                })}
+                        )}
+                    </div>
+                ))}
+                <h3>As tutor</h3>
+                {tutorComments.map(comment => (
+                    <div key={comment._id} className="comment-box">
+                        <p>Course Code: {comment.course}</p>
+                        <p>Year Taken: {comment.year}</p>
+                        <p>Rating: {comment.rating}/10</p>
+                        <p>Reviewer: {comment.reviewer}</p>
+                        <p className="comment-review">Comment: {comment.review}</p>
+                        {comment.reviewer === username && (
+                            <div className="staff-page-buttons">
+                                <button onClick={() => handleEdit(comment._id)}>Edit</button>
+                                <button onClick={() => handleDelete(comment._id)}>Delete</button>
+                            </div>
+                        )}
+                    </div>
+                ))}
             </div>
             <button className="add-comment-button" onClick={addComment}>Add Comment</button>
             <p>* Users will not be able to add a comment on a staff they have an existing comment on.</p>

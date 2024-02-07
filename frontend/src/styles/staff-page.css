@@ -39,6 +39,10 @@
     background-color: #45a049;
 }
 
+.comment-box .comment-review {
+    margin: 3vh 0;
+}
+
 .add-comment-button {
     margin-top: 20px;
     background-color: #008cba;
@@ -52,3 +56,4 @@
 .add-comment-button:hover {
     background-color: #005f70;
 }
+
