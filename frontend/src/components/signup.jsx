@@ -51,7 +51,7 @@ const Signup = () => {
         {error && <div className="error">{error}</div>}
         <button type="submit">Sign Up</button>
       </form>
-      <p>Already have an account? <Link to='login'>Log in</Link> instead!</p>
+      <p>Already have an account? <Link to='/login'>Log in</Link> instead!</p>
     </div>
   );
 };

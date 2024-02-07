@@ -1,0 +1,11 @@
+.display-about {
+    padding: 1vh 2vw;
+}
+
+.display-about a {
+    text-decoration: none;
+}
+
+.display-about li {
+    font-size: 2vh;
+}

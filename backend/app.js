@@ -23,6 +23,7 @@ var verifyLoginRouter = require('./routes/verify-login');
 var addStaffRouter = require('./routes/staff/add-staff-data');
 var getStaffDataRouter = require('./routes/staff/get-staff-data');
 var editStaffDataRouter = require('./routes/staff/edit-staff-data');
+var getUserDataRouter = require('./routes/user/get-user-data');
 
 var app = express();
 
@@ -55,37 +56,7 @@ app.use('/api/verify-login', verifyLoginRouter);
 app.use('/api/add-staff-data', addStaffRouter);
 app.use('/api/get-staff-data', getStaffDataRouter)
 app.use('/api/edit-staff-data', editStaffDataRouter);
-
-// passport.use(
-//   new LocalStrategy(async (username, password, done) => {
-//     try {
-//       const user = await User.findOne({ username: username });
-//       if (!user) {
-//         return done(null, false, { message: "Incorrect username" });
-//       };
-//       const match = await bcrypt.compare(password, user.password);
-//       if (!match) {
-//         return done(null, false, { message: "Incorrect password" });
-//       };
-//       return done(null, user);
-//     } catch(err) {
-//       return done(err);
-//     };
-//   })
-// );
-
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser(async (id, done) => {
-//   try {
-//     const user = await User.findById(id);
-//     done(null, user);
-//   } catch(err) {
-//     done(err);
-//   };
-// });
+app.use('/api/get-user-data', getUserDataRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/sidebar.css';
 
-const API_URL = 'http://localhost:3000'
+const API_URL = 'http://localhost:3000';
 
 const Sidebar = () => {
+    const [loading, setLoading] = useState(true); // State to track loading
     const [mostRatedLecturers, setMostRatedLecturers] = useState([]);
     const [highestRatedLecturers, setHighestRatedLecturers] = useState([]);
     const [mostRatedTutors, setMostRatedTutors] = useState([]);
@@ -28,75 +30,90 @@ const Sidebar = () => {
                 // Fetch highest rated tutor
                 const highestRatedTutorsResponse = await axios.get(`${API_URL}/api/get-staff-data/highest-rated-tutors`);
                 setHighestRatedTutors(highestRatedTutorsResponse.data);
+
+                setLoading(false); // Set loading to false when data is fetched
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
         };
 
         fetchData();
+
+        const interval = setInterval(() => {
+            fetchData();
+        }, 60000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return (
         <div className="sidebar">
-            <div className="section">
-                <h2>
-                    Most Rated Lecturers:
-                    <ol>
-                        {mostRatedLecturers.map(lecturer => {
-                            return (
-                                <li key={lecturer.name}>
-                                    <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.count} ratings
-                                </li>
-                            )
-                        })}
-                    </ol>
-                </h2>
-            </div>
-            <div className="section">
-                <h2>
-                    Highest Rated Lecturers:
-                    <ol>
-                        {highestRatedLecturers.map(lecturer => {
-                            return (
-                                <li key={lecturer.name}>
-                                    <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.averageRating}/10
-                                </li>
-                            )
-                        })}
-                    </ol>
-                </h2>
-            </div>
-            <div className="section">
-                <h2>
-                    Most Rated Tutors:
-                    <ol>
-                        {mostRatedTutors.map(tutor => {
-                            return (
-                                <li key={tutor.name}>
-                                    <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.count} ratings
-                                </li>
-                            )
-                        })}
-                    </ol>
-                </h2>
-            </div>
-            <div className="section">
-                <h2>
-                    Highest Rated Tutors:
-                    <ol>
-                        {highestRatedTutors.map(tutor => {
-                            return (
-                                <li key={tutor.name}>
-                                    <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.averageRating}/10
-                                </li>
-                            )
-                        })}
-                    </ol>
-                </h2>
-            </div>
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                <>
+                    <div className="section">
+                        <h1>Statistics:</h1>
+                        <h2>
+                            Most Rated Lecturers:
+                            <ol>
+                                {mostRatedLecturers.map(lecturer => {
+                                    return (
+                                        <li key={lecturer.name}>
+                                            <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.count} ratings
+                                        </li>
+                                    )
+                                })}
+                            </ol>
+                        </h2>
+                    </div>
+                    <div className="section">
+                        <h2>
+                            Highest Rated Lecturers:
+                            <ol>
+                                {highestRatedLecturers.map(lecturer => {
+                                    return (
+                                        <li key={lecturer.name}>
+                                            <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.averageRating}/10
+                                        </li>
+                                    )
+                                })}
+                            </ol>
+                        </h2>
+                    </div>
+                    <div className="section">
+                        <h2>
+                            Most Rated Tutors:
+                            <ol>
+                                {mostRatedTutors.map(tutor => {
+                                    return (
+                                        <li key={tutor.name}>
+                                            <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.count} ratings
+                                        </li>
+                                    )
+                                })}
+                            </ol>
+                        </h2>
+                    </div>
+                    <div className="section">
+                        <h2>
+                            Highest Rated Tutors:
+                            <ol>
+                                {highestRatedTutors.map(tutor => {
+                                    return (
+                                        <li key={tutor.name}>
+                                            <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.averageRating}/10
+                                        </li>
+                                    )
+                                })}
+                            </ol>
+                        </h2>
+                    </div>
+                    <p>Data updates every 60 seconds</p>
+                </>
+            )}
         </div>
     );
 };
 
 export default Sidebar;
-

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/search-results.css'
 
 const API_URL = 'http://localhost:3000';
 
 const SearchResults = () => {
     const location = useLocation();
     const [searchResults, setSearchResults] = useState([]);
+    const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -14,6 +16,7 @@ const SearchResults = () => {
             try {
                 const searchParams = new URLSearchParams(location.search);
                 const query = searchParams.get('query');
+                setQuery(query);
                 const response = await axios.post(`${API_URL}/api/get-staff-data/search-staff`, { searchTerm: query });
                 setSearchResults(response.data);
                 setLoading(false);
@@ -31,8 +34,8 @@ const SearchResults = () => {
     }
 
     return (
-        <div>
-            <h2>Search Results</h2>
+        <div className="search-results">
+            <h2>Search Results for {query}</h2>
             {searchResults.length === 0 ? (
                 <p>No results found.</p>
             ) : (

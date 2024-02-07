@@ -5,9 +5,12 @@ import Signup from "./components/Signup"
 import Welcome from "./components/Welcome"
 import Home from "./components/Home"
 import AddStaff from "./components/AddStaff"
+import EditStaff from "./components/EditStaff"
 import StaffPage from "./components/StaffPage"
 import ErrorPage from "./components/ErrorPage"
 import SearchResults from "./components/SearchResults"
+import DisplayAbout from "./components/DisplayAbout"
+import WelcomePage from "./components/WelcomePage"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -33,6 +36,10 @@ const App = () => {
       element: <Home />,
       children: [
         {
+          path: "about/:username",
+          element: <DisplayAbout />
+        },
+        {
           path: "add-staff",
           element: <AddStaff />
         },
@@ -41,8 +48,16 @@ const App = () => {
           element: <StaffPage />
         },
         {
+          path: "edit-staff/:commentId",
+          element: <EditStaff />
+        },
+        {
           path: "search",
           element: <SearchResults />
+        },
+        {
+          path: "welcome",
+          element: <WelcomePage />
         }
       ]
     }

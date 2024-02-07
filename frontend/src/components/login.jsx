@@ -44,7 +44,7 @@ const Login = () => {
             const response = await axios.post(`${API_URL}/api/login`, credentials);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', response.data.username.username);
-            navigate('/home');
+            navigate('/home/welcome');
         } catch (error) {
             setError(error.response.data.message);
             setSuccess('');
@@ -67,7 +67,7 @@ const Login = () => {
             {success && <div className="success">{success}</div>}
             <button type="submit">Login</button>
             </form>
-            <p>Don't have an account? <Link to='signup'>Sign up</Link> instead!</p>
+            <p>Don't have an account? <Link to='/signup'>Sign up</Link> instead!</p>
         </div>
     )
 }

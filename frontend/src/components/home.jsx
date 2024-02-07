@@ -10,6 +10,7 @@ const API_URL = 'http://localhost:3000';
 const Home = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const [totalRatings, setTotalRatings] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,6 +32,7 @@ const Home = () => {
                 const username = localStorage.getItem('username');
 
                 setUser(username);
+                fetchTotalRatings();
             } catch (error) {
                 console.error('Failed to fetch user data:', error);
                 // Handle error (e.g., redirect to login page)
@@ -38,17 +40,31 @@ const Home = () => {
             }
         };
 
+        const fetchTotalRatings = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/api/get-user-data/total-comments/${user}`);
+                setTotalRatings(response.data.totalComments);
+            } catch (error) {
+                console.error('Failed to fetch total comments: ', error);
+            }
+        }
+
         fetchData();
-    }, [navigate]);
+    }, [user, totalRatings, navigate]);
 
     return (
         <div className="home">
             <Sidebar />
             <div className="header">
-                {user && <h2>Hello, {user}</h2>}
-                <Link to="/logout">Logout</Link>
-                <Link to="/home/add-staff">Add Staff</Link>
-                <Search />
+                <div className="header-buttons">
+                    <Search />
+                    <button onClick={() => navigate('/home/add-staff')}>Add Staff</button>
+                </div>
+                <div className="profile">
+                    {user && <h2>Hello, {user}</h2>}
+                    <p>You have <Link to={`/home/about/${user}`}>{totalRatings} active ratings</Link></p>
+                    <button onClick={() => navigate('/logout')}>Log out</button>
+                </div>
             </div>
             <div className="main-content">
                 <Outlet />

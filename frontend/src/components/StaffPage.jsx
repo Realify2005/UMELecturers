@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import '../styles/staff-page.css'
 
 const API_URL = "http://localhost:3000"
 
@@ -22,7 +23,7 @@ const StaffPage = () => {
     }
 
     const handleEdit = (commentId) => {
-        console.log(`Editing comment with ID: ${commentId}`);
+        navigate(`/home/edit-staff/${commentId}`)
     }
 
     const handleDelete = async (commentId) => {
@@ -69,13 +70,14 @@ const StaffPage = () => {
     }
 
     return (
-        <div>
+        <div className="staff-page">
             <h1>{staffName.current}</h1>
             <h2>Comments:</h2>
             <div className="comments">
                 {staffData.map(data => {
                     return (
                         <div key={data._id} className="comment-box">
+                            <p>Reviewing as {data.type}</p>
                             <p>Course code: {data.course}</p>
                             <p>Year Taken: {data.year}</p>
                             <p>Rating: {data.rating}/10</p>
@@ -91,7 +93,8 @@ const StaffPage = () => {
                     )
                 })}
             </div>
-            <button onClick={addComment}>Add Comment</button>
+            <button className="add-comment-button" onClick={addComment}>Add Comment</button>
+            <p>* Users will not be able to add a comment on a staff they have an existing comment on.</p>
         </div>
     );
 };

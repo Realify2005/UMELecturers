@@ -1,0 +1,15 @@
+.sidebar {
+    background-color: lightgreen;
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    padding: 0 2vw;
+}
+
+.sidebar h1 {
+    margin-bottom: 1vh;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #f5b;
+}

@@ -18,17 +18,15 @@ const SearchStaff = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Search staff..."
-                    value={searchTerm}
-                    onChange={handleChange}
-                />
-                <button type="submit">Search</button>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder="Search staff..."
+                value={searchTerm}
+                onChange={handleChange}
+            />
+            <button type="submit">Search</button>
+        </form>
     );
 };
 

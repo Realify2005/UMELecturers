@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import '../styles/error-page.css'
 
 const ErrorPage = () => {
   return (
-    <div>
+    <div className="error-page"> 
       <h1>Oh no, this route doesn't exist!</h1>
-      <Link to="/home">
+      <p>Looks like you've landed on... a deserted island</p>
+      <Link to="/home/welcome">
         You can go back to the home page by clicking here, though!
       </Link>
     </div>

@@ -1,0 +1,21 @@
+/* error-page.css */
+
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.error-page h1 {
+    font-size: 3rem;
+    color: #ff6347; /* Or any other color you prefer */
+}
+
+.error-page p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #333; /* Or any other color you prefer */
+}

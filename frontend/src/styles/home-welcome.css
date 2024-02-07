@@ -1,0 +1,23 @@
+.home-welcome-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.home-welcome-page .content {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-welcome-page .content h1, .home-welcome-page .content p {
+    margin: 1vh;
+}
+
+.home-welcome-page .content p {
+    font-size: 1.925vh;
+}

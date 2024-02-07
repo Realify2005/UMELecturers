@@ -163,4 +163,20 @@ router.post("/search-staff", async(req, res) => {
   }
 })
 
+router.get("/find-by-comment/:commentId", async(req, res) => {
+  try {
+    const commentId = req.params.commentId;
+    const staffData = await Staff.findById(commentId);
+
+    if (!staffData) {
+      res.status(404).json({ error: "notFound" })
+    }
+
+    res.status(200).json(staffData);
+  } catch (error) {
+    console.error('Error finding staff by comment Id: ', error);
+    res.status(500).json({ error: 'An unexpected error has occured' });
+  }
+})
+
 module.exports = router;
