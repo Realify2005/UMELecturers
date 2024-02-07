@@ -22,7 +22,6 @@ const SearchResults = () => {
                 setLoading(false);
             } catch (error) {
                 console.error('Error searching staff: ', error);
-                // Handle error
             }
         };
 
@@ -43,7 +42,7 @@ const SearchResults = () => {
                     {searchResults.map((staff, index) => (
                         <li key={index}>
                             <Link to={`/home/staff/${staff.nameHyphened}`}>{staff.name}</Link>
-                        </li> // Modify this to display other staff details
+                        </li>
                     ))}
                 </ul>
             )}

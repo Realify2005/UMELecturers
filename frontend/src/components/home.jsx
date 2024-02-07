@@ -15,16 +15,13 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Get JWT token from localStorage (assuming it's stored there upon login)
                 const token = localStorage.getItem('token');
 
                 if (!token) {
-                    // If token is not present, redirect to login
                     navigate('/login?status=Unauthorized');
                     return;
                 }
 
-                // Make a request to a protected backend route
                 await axios.get(`${API_URL}/api/verify-login`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
@@ -35,7 +32,6 @@ const Home = () => {
                 fetchTotalRatings();
             } catch (error) {
                 console.error('Failed to fetch user data:', error);
-                // Handle error (e.g., redirect to login page)
                 navigate('/login');
             }
         };

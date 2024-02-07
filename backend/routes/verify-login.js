@@ -1,9 +1,7 @@
-// Import necessary modules
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-// Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
   const bearerHeader = req.headers.authorization;
 
@@ -27,11 +25,8 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// Protected route to retrieve user data
 router.get('/', verifyToken, (req, res) => {
-  // If authenticated, send back user data
   res.status(200).json({ user: req.user });
 });
 
-// Export the router
 module.exports = router;

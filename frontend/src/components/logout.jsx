@@ -5,15 +5,13 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Clear token from localStorage upon logout
     localStorage.removeItem('token');
     localStorage.removeItem('username');
 
-    // Redirect to the login page
     navigate('/login?status=logoutSuccess');
   }, [navigate]);
 
-  return null; // This component doesn't render anything, it just handles logout logic
+  return null; 
 };
 
 export default Logout;

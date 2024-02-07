@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import '../styles/welcome.css'; // Import your custom CSS file for styling
-
+import '../styles/welcome.css';
 const Welcome = () => {
 
     useEffect(() => {

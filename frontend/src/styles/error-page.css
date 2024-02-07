@@ -1,5 +1,3 @@
-/* error-page.css */
-
 .error-page {
     display: flex;
     flex-direction: column;
@@ -11,11 +9,11 @@
 
 .error-page h1 {
     font-size: 3rem;
-    color: #ff6347; /* Or any other color you prefer */
+    color: #ff6347;
 }
 
 .error-page p {
     font-size: 1.2rem;
     margin: 0.5rem 0;
-    color: #333; /* Or any other color you prefer */
+    color: #333;
 }

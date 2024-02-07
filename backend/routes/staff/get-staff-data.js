@@ -5,7 +5,6 @@ const Staff = require('../../models/Staff');
 // Placeholder route handler
 router.get('/highest-rated-lecturers', async (req, res) => {
   try {
-    // Fetch tutors with their respective ratings
     const highestRatedLecturers = await Staff.aggregate([
       { 
         $match: { type: "lecturer", rating: { $exists: true } }
@@ -25,8 +24,6 @@ router.get('/highest-rated-lecturers', async (req, res) => {
       }
     ]);
 
-    // console.log('Top 3 Lecturers by Average Rating:', highestRatedLecturers);
-
     res.status(200).json(highestRatedLecturers);
   } catch (error) {
     console.log('Error fetching top 3 highest rated lecturer: ', error);
@@ -37,7 +34,6 @@ router.get('/highest-rated-lecturers', async (req, res) => {
 
 router.get('/highest-rated-tutors', async (req, res) => {
   try {
-    // Fetch tutors with their respective ratings
     const highestRatedTutors = await Staff.aggregate([
       { 
         $match: { type: "tutor", rating: { $exists: true } }
@@ -56,8 +52,6 @@ router.get('/highest-rated-tutors', async (req, res) => {
         $limit: 3
       }
     ]);
-
-    // console.log('Top 3 Tutors by Average Rating:', highestRatedTutors);
 
     res.status(200).json(highestRatedTutors);
   } catch (error) {
@@ -152,7 +146,6 @@ router.post("/search-staff", async(req, res) => {
           _id: "$name",
           name: { $first: "$name" },
           nameHyphened: { $first: "$nameHyphened" }
-          // Add other fields you want to include in the response
         }
       }
     ]);

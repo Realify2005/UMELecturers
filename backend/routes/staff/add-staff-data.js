@@ -14,7 +14,8 @@ router.post('/', async (req, res) => {
         }
 
         // Create new staff data
-        const newStaff = new Staff({ type, name, nameHyphened, rating, course, year, review, reviewer });
+        const currentDate = new Date();
+        const newStaff = new Staff({ type, name, nameHyphened, rating, course, year, review, reviewer, createdAt: currentDate });
         await newStaff.save();
 
         // Respond with success

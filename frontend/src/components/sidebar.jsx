@@ -6,7 +6,7 @@ import '../styles/sidebar.css';
 const API_URL = 'http://localhost:3000';
 
 const Sidebar = () => {
-    const [loading, setLoading] = useState(true); // State to track loading
+    const [loading, setLoading] = useState(true);
     const [mostRatedLecturers, setMostRatedLecturers] = useState([]);
     const [highestRatedLecturers, setHighestRatedLecturers] = useState([]);
     const [mostRatedTutors, setMostRatedTutors] = useState([]);
