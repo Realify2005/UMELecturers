@@ -34,6 +34,7 @@
 
 .comment-box p {
     margin: 5px 0;
+    word-wrap: break-word;
 }
 
 .comment-box button {

@@ -57,6 +57,9 @@ const AddStaff = () => {
                 review: ''
             })
             navigate(`/home/staff/${staffData.nameHyphened}`);
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
         } catch (error) {
             if (error.response.data.result === "Unauthorized") {
                 // console.log('User unauthorized to add another comment on same staff', error);
