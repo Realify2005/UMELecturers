@@ -5,7 +5,6 @@ import Sidebar from './Sidebar';
 import '../styles/home.css';
 import Search from './Search';
 
-const API_URL = 'http://localhost:3000';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -22,7 +21,7 @@ const Home = () => {
                     return;
                 }
 
-                await axios.get(`${API_URL}/api/verify-login`, {
+                await axios.get(`${import.meta.env.VITE_API_URL}/api/verify-login`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -38,7 +37,7 @@ const Home = () => {
 
         const fetchTotalRatings = async () => {
             try {
-                const response = await axios.get(`${API_URL}/api/get-user-data/total-comments/${user}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-user-data/total-comments/${user}`);
                 setTotalRatings(response.data.totalComments);
             } catch (error) {
                 console.error('Failed to fetch total comments: ', error);
@@ -50,7 +49,6 @@ const Home = () => {
 
     return (
         <div className="home">
-            <Sidebar />
             <div className="header">
                 <div className="header-buttons">
                     <Search />
@@ -65,6 +63,7 @@ const Home = () => {
             <div className="main-content">
                 <Outlet />
             </div>
+            <Sidebar />
         </div>
     );
 };

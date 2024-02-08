@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom'
 import '../styles/add-edit-staff.css'
-
-const API_URL = 'http://localhost:3000'
 
 const AddStaff = () => {
     const navigate = useNavigate();
@@ -45,12 +43,10 @@ const AddStaff = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (staffData.type === null || staffData.rating === null) {
-            console.log('Please select type and rating');
             return; // Prevent form submission if type or rating is not selected
         }
         try {
-            const response = await axios.post(`${API_URL}/api/add-staff-data`, staffData);
-            console.log('Staff added successfully:', response.data);
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/add-staff-data`, staffData);
             setStaffData({
                 type: null,
                 name: prefilledStaffName,
@@ -63,10 +59,10 @@ const AddStaff = () => {
             navigate(`/home/staff/${staffData.nameHyphened}`);
         } catch (error) {
             if (error.response.data.result === "Unauthorized") {
-                console.log('User unauthorized to add another comment on same staff', error);
+                // console.log('User unauthorized to add another comment on same staff', error);
                 setError(error.response.data.message);
             }
-            console.log('Failed to add staff:', error)
+            // console.log('Failed to add staff:', error)
         }
     };
 
@@ -90,16 +86,16 @@ const AddStaff = () => {
                     <label>Rating:</label>
                     <select name="rating" value={staffData.rating || ''} onChange={handleChange} required>
                         <option value="" disabled>Select Rating</option>
-                        <option value="1">1/10</option>
-                        <option value="2">2/10</option>
-                        <option value="3">3/10</option>
-                        <option value="4">4/10</option>
-                        <option value="5">5/10</option>
-                        <option value="6">6/10</option>
-                        <option value="7">7/10</option>
-                        <option value="8">8/10</option>
-                        <option value="9">9/10</option>
-                        <option value="10">10/10</option>
+                        <option value="1">1★ / 10</option>
+                        <option value="2">2★ / 10</option>
+                        <option value="3">3★ / 10</option>
+                        <option value="4">4★ / 10</option>
+                        <option value="5">5★ / 10</option>
+                        <option value="6">6★ / 10</option>
+                        <option value="7">7★ / 10</option>
+                        <option value="8">8★ / 10</option>
+                        <option value="9">9★ / 10</option>
+                        <option value="10">10★ / 10</option>
                     </select>
                 </div>
                 <div>

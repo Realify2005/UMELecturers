@@ -5,6 +5,11 @@
     padding: 0 2vw;
 }
 
+.sidebar img[src="/src/assets/star.png"] {
+    height: 2.2vh;
+    margin-bottom: -0.2vh;
+}
+
 .sidebar h1 {
     margin-bottom: 1vh;
 }

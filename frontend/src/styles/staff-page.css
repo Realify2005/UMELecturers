@@ -14,11 +14,22 @@
     max-width: 800px;
 }
 
+.comments img[src="/src/assets/star.png"] {
+    height: 2vh;
+    margin-bottom: -0.2vh;
+}
+
 .comment-box {
     background-color: #f5f5f5;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-box .left-side {
+    max-width: 80%;
 }
 
 .comment-box p {

@@ -3,8 +3,6 @@ import axios from 'axios';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import '../styles/login.css'
 
-const API_URL = 'http://localhost:3000'
-
 const Login = () => {
     const [credentials, setCredentials] = useState({
         username: '',
@@ -41,7 +39,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_URL}/api/login`, credentials);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, credentials);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', response.data.username.username);
             navigate('/home/welcome');

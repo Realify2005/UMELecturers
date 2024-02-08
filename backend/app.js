@@ -27,7 +27,7 @@ var getUserDataRouter = require('./routes/user/get-user-data');
 
 var app = express();
 
-mongoose.connect('mongodb+srv://Realify:Clement200@cluster0.ek03mcz.mongodb.net/all_collections?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 

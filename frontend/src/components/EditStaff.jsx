@@ -3,8 +3,6 @@ import axios from 'axios';
 import { useNavigate, useLocation, useParams, Link } from 'react-router-dom'
 import '../styles/add-edit-staff.css'
 
-const API_URL = 'http://localhost:3000'
-
 const EditStaff = () => {
     const { commentId } = useParams();
     const navigate = useNavigate();
@@ -24,7 +22,7 @@ const EditStaff = () => {
     useEffect(() => {
         const fetchStaffData = async () => {
             try {
-                const response = await axios.get(`${API_URL}/api/get-staff-data/find-by-comment/${commentId}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/find-by-comment/${commentId}`);
                 const { type, name, nameHyphened, rating, course, year, review, reviewer } = response.data;
 
                 if (reviewer !== localStorage.getItem('username')) {
@@ -64,11 +62,10 @@ const EditStaff = () => {
 
     const handleConfirm = async () => {
         try {
-            await axios.post(`${API_URL}/api/edit-staff-data/edit-comment/${commentId}`, staffData);
-            console.log('Successfully edited staff. Navigating back...');
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/edit-staff-data/edit-comment/${commentId}`, staffData);
             navigate(`/home/staff/${staffData.nameHyphened}`);
         } catch (error) {
-            console.log('Failed to edit staff: ', error);
+            // console.log('Failed to edit staff: ', error);
         }
     }
 
@@ -99,16 +96,16 @@ const EditStaff = () => {
                             <label>Rating:</label>
                             <select name="rating" value={staffData.rating.toString()} onChange={handleChange} required>
                                 <option value="" disabled>Select Rating</option>
-                                <option value="1">1/10</option>
-                                <option value="2">2/10</option>
-                                <option value="3">3/10</option>
-                                <option value="4">4/10</option>
-                                <option value="5">5/10</option>
-                                <option value="6">6/10</option>
-                                <option value="7">7/10</option>
-                                <option value="8">8/10</option>
-                                <option value="9">9/10</option>
-                                <option value="10">10/10</option>
+                                <option value="1">1★ / 10</option>
+                                <option value="2">2★ / 10</option>
+                                <option value="3">3★ / 10</option>
+                                <option value="4">4★ / 10</option>
+                                <option value="5">5★ / 10</option>
+                                <option value="6">6★ / 10</option>
+                                <option value="7">7★ / 10</option>
+                                <option value="8">8★ / 10</option>
+                                <option value="9">9★ / 10</option>
+                                <option value="10">10★ / 10</option>
                             </select>
                         </div>
                         <div>

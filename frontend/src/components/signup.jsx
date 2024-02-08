@@ -3,8 +3,6 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom'
 import '../styles/signup.css'
 
-const API_URL = 'http://localhost:3000'
-
 const Signup = () => {
   const [credentials, setCredentials] = useState({
     username: '',
@@ -29,7 +27,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API_URL}/api/signup`, credentials);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/signup`, credentials);
       navigate('/login');
     } catch (error) {
       setError(error.response.data.message); // Display error message to the user

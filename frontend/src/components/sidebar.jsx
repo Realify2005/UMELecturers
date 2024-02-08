@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/sidebar.css';
-
-const API_URL = 'http://localhost:3000';
+import star from '../assets/star.png';
 
 const Sidebar = () => {
     const [loading, setLoading] = useState(true);
@@ -16,19 +15,19 @@ const Sidebar = () => {
         const fetchData = async () => {
             try {
                 // Fetch most popular lecturer
-                const mostRatedLecturersResponse = await axios.get(`${API_URL}/api/get-staff-data/most-rated-lecturers`);
+                const mostRatedLecturersResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/most-rated-lecturers`);
                 setMostRatedLecturers(mostRatedLecturersResponse.data);
 
                 // Fetch most popular tutor
-                const mostRatedTutorsResponse = await axios.get(`${API_URL}/api/get-staff-data/most-rated-tutors`);
+                const mostRatedTutorsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/most-rated-tutors`);
                 setMostRatedTutors(mostRatedTutorsResponse.data);
 
                 // Fetch highest rated lecturer
-                const highestRatedLecturersResponse = await axios.get(`${API_URL}/api/get-staff-data/highest-rated-lecturers`);
+                const highestRatedLecturersResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/highest-rated-lecturers`);
                 setHighestRatedLecturers(highestRatedLecturersResponse.data);
 
                 // Fetch highest rated tutor
-                const highestRatedTutorsResponse = await axios.get(`${API_URL}/api/get-staff-data/highest-rated-tutors`);
+                const highestRatedTutorsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/highest-rated-tutors`);
                 setHighestRatedTutors(highestRatedTutorsResponse.data);
 
                 setLoading(false); // Set loading to false when data is fetched
@@ -74,7 +73,7 @@ const Sidebar = () => {
                                 {highestRatedLecturers.map(lecturer => {
                                     return (
                                         <li key={lecturer.name}>
-                                            <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.averageRating}/10
+                                            <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.averageRating.toFixed(1)}<img src={star} alt="star icon" /> / 10
                                         </li>
                                     )
                                 })}
@@ -102,7 +101,7 @@ const Sidebar = () => {
                                 {highestRatedTutors.map(tutor => {
                                     return (
                                         <li key={tutor.name}>
-                                            <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.averageRating}/10
+                                            <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.averageRating.toFixed(1)}<img src={star} alt="star icon" /> / 10
                                         </li>
                                     )
                                 })}

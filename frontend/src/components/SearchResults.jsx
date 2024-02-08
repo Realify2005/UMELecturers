@@ -3,8 +3,6 @@ import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/search-results.css'
 
-const API_URL = 'http://localhost:3000';
-
 const SearchResults = () => {
     const location = useLocation();
     const [searchResults, setSearchResults] = useState([]);
@@ -17,7 +15,7 @@ const SearchResults = () => {
                 const searchParams = new URLSearchParams(location.search);
                 const query = searchParams.get('query');
                 setQuery(query);
-                const response = await axios.post(`${API_URL}/api/get-staff-data/search-staff`, { searchTerm: query });
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/get-staff-data/search-staff`, { searchTerm: query });
                 setSearchResults(response.data);
                 setLoading(false);
             } catch (error) {

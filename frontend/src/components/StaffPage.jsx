@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/staff-page.css';
-
-const API_URL = "http://localhost:3000";
+import star from '../assets/star.png';
 
 const StaffPage = () => {
     const staffName = useRef(null);
@@ -11,8 +10,10 @@ const StaffPage = () => {
     const navigate = useNavigate();
     const [lecturerComments, setLecturerComments] = useState([]);
     const [tutorComments, setTutorComments] = useState([]);
-    const [error, setError] = useState(null);
+    const [lecturerRating, setLecturerRating] = useState(null);
+    const [tutorRating, setTutorRating] = useState(null);
     const [username, setUsername] = useState(localStorage.getItem('username'));
+    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const handleClick = () => {
@@ -32,28 +33,32 @@ const StaffPage = () => {
             const confirmDelete = window.confirm('Are you sure you want to delete this comment?');
             if (!confirmDelete) return;
 
-            await axios.delete(`${API_URL}/api/edit-staff-data/delete-comment`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/api/edit-staff-data/delete-comment`, {
                 data: { commentId: commentId, username: username }
             });
 
             setLecturerComments(prevComments => prevComments.filter(comment => comment._id !== commentId));
             setTutorComments(prevComments => prevComments.filter(comment => comment._id !== commentId));
             
-            console.log(`Deleted comment with ID: ${commentId}`);
         } catch (error) {
-            console.error('Error deleting comment: ', error);
+            // console.error('Error deleting comment: ', error);
         }
     }
 
     useEffect(() => {
         const fetchStaffData = async () => {
             try {
-                const response = await axios.post(`${API_URL}/api/get-staff-data/staff-page`, {staffNameHyphened: staffNameHyphened});
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/get-staff-data/staff-page`, {staffNameHyphened: staffNameHyphened});
                 staffName.current = response.data[0].name;
-                console.log(response.data);
+                
+                const convertedData = response.data.map(comment => ({
+                    ...comment,
+                    createdAt: new Date(comment.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric'})
+                }))
 
-                const lecturerComments = response.data.filter(comment => comment.type === 'lecturer');
-                const tutorComments = response.data.filter(comment => comment.type === 'tutor');
+                const lecturerComments = convertedData.filter(comment => comment.type === 'lecturer');
+                const tutorComments = convertedData.filter(comment => comment.type === 'tutor');
+
                 setLecturerComments(lecturerComments);
                 setTutorComments(tutorComments);
 
@@ -65,6 +70,18 @@ const StaffPage = () => {
 
         fetchStaffData();
     }, [staffNameHyphened])
+
+    useEffect(() => {
+        const lecturerRatings = lecturerComments.map(comment => comment.rating);
+        const lecturerTotalRating = lecturerRatings.reduce((a, b) => a + b, 0);
+        const lecturerAvgRating = lecturerTotalRating / lecturerComments.length;
+        setLecturerRating(lecturerAvgRating);
+
+        const tutorRatings = tutorComments.map(comment => comment.rating);
+        const tutorTotalRating = tutorRatings.reduce((a, b) => a + b, 0);
+        const tutorAvgRating = tutorTotalRating / tutorComments.length;
+        setTutorRating(tutorAvgRating);   
+    }, [lecturerComments, tutorComments])
 
     if (error && error.response.status === 404) {
         return (
@@ -84,36 +101,46 @@ const StaffPage = () => {
             <h1>{staffName.current}</h1>
             <h2>Comments:</h2>
             <div className="comments">
-                <h3>As lecturer</h3>
-                {lecturerComments.map(comment => (
+            <h3>As lecturer: {!isNaN(lecturerRating) ? `${lecturerRating.toFixed(1)}` : ''}{!isNaN(lecturerRating) && <img src={star} alt="star icon" />} {!isNaN(lecturerRating) && "/ 10"}</h3>
+                {lecturerComments.slice().reverse().map(comment => (
                     <div key={comment._id} className="comment-box">
-                        <p>Course Code: {comment.course}</p>
-                        <p>Year Taken: {comment.year}</p>
-                        <p>Rating: {comment.rating}/10</p>
-                        <p>Reviewer: {comment.reviewer}</p>
-                        <p className="comment-review">{comment.review}</p>
-                        {comment.reviewer === username && (
-                            <>
-                                <button onClick={() => handleEdit(comment._id)}>Edit</button>
-                                <button onClick={() => handleDelete(comment._id)}>Delete</button>
-                            </>
-                        )}
+                        <div className="left-side">
+                            <p>Course Code: {comment.course}</p>
+                            <p>Year Taken: {comment.year}</p>
+                            <p>Rating: {comment.rating}<img src={star} alt="star icon" /> / 10</p>
+                            <p>Reviewer: {comment.reviewer}</p>
+                            <p className="comment-review">{comment.review}</p>
+                            {comment.reviewer === username && (
+                                <>
+                                    <button onClick={() => handleEdit(comment._id)}>Edit</button>
+                                    <button onClick={() => handleDelete(comment._id)}>Delete</button>
+                                </>
+                            )}
+                        </div>
+                        <div className="right-side">
+                            <p>{comment.createdAt}</p>
+                        </div>
                     </div>
                 ))}
-                <h3>As tutor</h3>
-                {tutorComments.map(comment => (
+                <h3>As tutor: {!isNaN(tutorRating) ? `${tutorRating.toFixed(1)}` : ''}{!isNaN(tutorRating) && <img src={star} alt="star icon" />} {!isNaN(tutorRating) && "/ 10"}</h3>
+                {tutorComments.slice().reverse().map(comment => (
                     <div key={comment._id} className="comment-box">
-                        <p>Course Code: {comment.course}</p>
-                        <p>Year Taken: {comment.year}</p>
-                        <p>Rating: {comment.rating}/10</p>
-                        <p>Reviewer: {comment.reviewer}</p>
-                        <p className="comment-review">Comment: {comment.review}</p>
-                        {comment.reviewer === username && (
-                            <div className="staff-page-buttons">
-                                <button onClick={() => handleEdit(comment._id)}>Edit</button>
-                                <button onClick={() => handleDelete(comment._id)}>Delete</button>
-                            </div>
-                        )}
+                        <div className="left-side">
+                            <p>Course Code: {comment.course}</p>
+                            <p>Year Taken: {comment.year}</p>
+                            <p>Rating: {comment.rating}<img src={star} alt="star icon" /> / 10</p>
+                            <p>Reviewer: {comment.reviewer}</p>
+                            <p className="comment-review">{comment.review}</p>
+                            {comment.reviewer === username && (
+                                <>
+                                    <button onClick={() => handleEdit(comment._id)}>Edit</button>
+                                    <button onClick={() => handleDelete(comment._id)}>Delete</button>
+                                </>
+                            )}
+                        </div>
+                        <div className="right-side">
+                            <p>{comment.createdAt}</p>
+                        </div>
                     </div>
                 ))}
             </div>
