@@ -3,14 +3,14 @@ import Login from './components/login'
 import Logout from "./components/logout"
 import Signup from "./components/signup"
 import Welcome from "./components/welcome"
-import Home from "./components/Home"
+import Home from "./components/home"
 import AddStaff from "./components/addStaff"
-import EditStaff from "./components/EditStaff"
+import EditStaff from "./components/editStaff"
 import StaffPage from "./components/staffPage"
-import ErrorPage from "./components/ErrorPage"
-import SearchResults from "./components/SearchResults"
-import DisplayAbout from "./components/DisplayAbout"
-import WelcomePage from "./components/WelcomePage"
+import ErrorPage from "./components/errorPage"
+import SearchResults from "./components/searchResults"
+import DisplayAbout from "./components/displayAbout"
+import WelcomePage from "./components/welcomePage"
 
 const App = () => {
   const router = createBrowserRouter([
