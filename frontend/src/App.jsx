@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Login from './components/login'
-import Logout from "./components/logout"
-import Signup from "./components/signup"
-import Welcome from "./components/welcome"
-import Home from "./components/home"
-import AddStaff from "./components/addStaff"
+import Login from './components/Login'
+import Logout from "./components/Logout"
+import Signup from "./components/Signup"
+import Welcome from "./components/Welcome"
+import Home from "./components/Home"
+import AddStaff from "./components/AddStaff"
 import EditStaff from "./components/EditStaff"
 import StaffPage from "./components/StaffPage"
 import ErrorPage from "./components/ErrorPage"
