@@ -1,16 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Login from '/src/components/Login'
-import Logout from "/src/components/Logout"
-import Signup from "/src/components/Signup"
-import Welcome from "/src/components/Welcome"
-import Home from "/src/components/Home"
-import AddStaff from "/src/components/AddStaff"
-import EditStaff from "/src/components/EditStaff"
-import StaffPage from "/src/components/StaffPage"
-import ErrorPage from "/src/components/ErrorPage"
-import SearchResults from "/src/components/SearchResults"
-import DisplayAbout from "/src/components/DisplayAbout"
-import WelcomePage from "/src/components/WelcomePage"
+import Login from './components/login'
+import Logout from "./components/logout"
+import Signup from "./components/signup"
+import Welcome from "./components/welcome"
+import Home from "./components/Home"
+import AddStaff from "./components/addStaff"
+import EditStaff from "./components/EditStaff"
+import StaffPage from "./components/staffPage"
+import ErrorPage from "./components/ErrorPage"
+import SearchResults from "./components/SearchResults"
+import DisplayAbout from "./components/DisplayAbout"
+import WelcomePage from "./components/WelcomePage"
 
 const App = () => {
   const router = createBrowserRouter([
