@@ -14,7 +14,7 @@
     max-width: 800px;
 }
 
-.comments img[src="/src/assets/star.png"] {
+.comments .star-icon {
     height: 2vh;
     margin-bottom: -0.2vh;
 }

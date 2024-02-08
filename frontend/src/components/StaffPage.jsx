@@ -101,7 +101,7 @@ const StaffPage = () => {
             <h1>{staffName.current}</h1>
             <h2>Comments:</h2>
             <div className="comments">
-            <h3>As lecturer: {!isNaN(lecturerRating) ? `${lecturerRating.toFixed(1)}` : ''}{!isNaN(lecturerRating) && <img src={star} alt="star icon" />} {!isNaN(lecturerRating) && "/ 10"}</h3>
+            <h3>As lecturer: {!isNaN(lecturerRating) ? `${lecturerRating.toFixed(1)}` : ''}{!isNaN(lecturerRating) && <img className="star-icon" src={star} alt="star icon" />} {!isNaN(lecturerRating) && "/ 10"}</h3>
                 {lecturerComments.slice().reverse().map(comment => (
                     <div key={comment._id} className="comment-box">
                         <div className="left-side">
@@ -122,7 +122,7 @@ const StaffPage = () => {
                         </div>
                     </div>
                 ))}
-                <h3>As tutor: {!isNaN(tutorRating) ? `${tutorRating.toFixed(1)}` : ''}{!isNaN(tutorRating) && <img src={star} alt="star icon" />} {!isNaN(tutorRating) && "/ 10"}</h3>
+                <h3>As tutor: {!isNaN(tutorRating) ? `${tutorRating.toFixed(1)}` : ''}{!isNaN(tutorRating) && <img className="star-icon" src={star} alt="star icon" />} {!isNaN(tutorRating) && "/ 10"}</h3>
                 {tutorComments.slice().reverse().map(comment => (
                     <div key={comment._id} className="comment-box">
                         <div className="left-side">

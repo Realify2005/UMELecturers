@@ -5,7 +5,7 @@
     padding: 0 2vw;
 }
 
-.sidebar img[src="/src/assets/star.png"] {
+.sidebar .star-icon {
     height: 2.2vh;
     margin-bottom: -0.2vh;
 }

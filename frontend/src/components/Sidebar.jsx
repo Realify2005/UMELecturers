@@ -73,7 +73,7 @@ const Sidebar = () => {
                                 {highestRatedLecturers.map(lecturer => {
                                     return (
                                         <li key={lecturer.name}>
-                                            <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.averageRating.toFixed(1)}<img src={star} alt="star icon" /> / 10
+                                            <Link to={`/home/staff/${lecturer.name.toLowerCase().split(' ').join('-')}`}>{lecturer.name}</Link> - {lecturer.averageRating.toFixed(1)}<img className="star-icon" src={star} alt="star icon" /> / 10
                                         </li>
                                     )
                                 })}
@@ -101,7 +101,7 @@ const Sidebar = () => {
                                 {highestRatedTutors.map(tutor => {
                                     return (
                                         <li key={tutor.name}>
-                                            <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.averageRating.toFixed(1)}<img src={star} alt="star icon" /> / 10
+                                            <Link to={`/home/staff/${tutor.name.toLowerCase().split(' ').join('-')}`}>{tutor.name}</Link> - {tutor.averageRating.toFixed(1)}<img className="star-icon" src={star} alt="star icon" /> / 10
                                         </li>
                                     )
                                 })}
