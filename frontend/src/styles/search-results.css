@@ -1,3 +1,7 @@
+.search-results {
+    padding: 1vh 2vw;
+}
+
 .search-results a {
     color: purple;
     text-decoration: none;
