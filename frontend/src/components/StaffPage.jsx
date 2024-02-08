@@ -107,7 +107,7 @@ const StaffPage = () => {
                         <div className="left-side">
                             <p>Course Code: {comment.course}</p>
                             <p>Year Taken: {comment.year}</p>
-                            <p>Rating: {comment.rating}<img src={star} alt="star icon" /> / 10</p>
+                            <p>Rating: {comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</p>
                             <p>Reviewer: {comment.reviewer}</p>
                             <p className="comment-review">{comment.review}</p>
                             {comment.reviewer === username && (
