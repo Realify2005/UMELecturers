@@ -7,10 +7,10 @@ import Home from "./components/home"
 import AddStaff from "./components/addStaff"
 import EditStaff from "./components/EditStaff"
 import StaffPage from "./components/StaffPage"
-import ErrorPage from "./components/errorPage"
-import SearchResults from "./components/searchResults"
-import DisplayAbout from "./components/displayAbout"
-import WelcomePage from "./components/welcomePage"
+import ErrorPage from "./components/ErrorPage"
+import SearchResults from "./components/SearchResults"
+import DisplayAbout from "./components/DisplayAbout"
+import WelcomePage from "./components/WelcomePage"
 
 const App = () => {
   const router = createBrowserRouter([
