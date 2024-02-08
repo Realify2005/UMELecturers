@@ -11,7 +11,8 @@ const DisplayAbout = () => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-user-data/all-comments/${username}`);
-                setComments(response.data.allComments);
+                const sortedComments = response.data.allComments.sort((a, b) => a.name.localeCompare(b.name));
+                setComments(sortedComments);
             } catch (error) {
                 console.error('Failed to fetch comments: ', error);
             }
