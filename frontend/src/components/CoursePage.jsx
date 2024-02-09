@@ -63,7 +63,7 @@ const CoursePage = () => {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Rating</th>
+                                <th>Average Rating</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +88,7 @@ const CoursePage = () => {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Rating</th>
+                                <th>Average Rating</th>
                             </tr>
                         </thead>
                         <tbody>
