@@ -50,6 +50,20 @@
     background-color: #0056b3;
 }
 
+.login-container .guest-login {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.login-container .guest-login:hover {
+    background-color: #218838;
+}
+
+
 .error {
     color: red;
     margin-top: 10px;

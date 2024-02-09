@@ -48,6 +48,11 @@ const Login = () => {
             setSuccess('');
         }
     }
+    
+    const guestLogin = () => {
+        setCredentials({username: 'guest', password: 'guest'});
+        handleSubmit();
+    }
 
     return (
         <div className="login-container">
@@ -65,6 +70,7 @@ const Login = () => {
             {success && <div className="success">{success}</div>}
             <button type="submit">Login</button>
             </form>
+            <button className="guest-login" onClick={guestLogin}>Login as Guest</button>
             <p>Don't have an account? <Link to='/signup'>Sign up</Link> instead!</p>
         </div>
     )
