@@ -10,8 +10,9 @@ import EditStaff from "./components/EditStaff"
 import StaffPage from "./components/StaffPage"
 import ErrorPage from "./components/ErrorPage"
 import SearchResults from "./components/SearchResults"
-import UserProfile from "./components/DisplayUser"
+import UserProfile from "./components/UserProfile"
 import WelcomePage from "./components/WelcomePage"
+import Statistics from "./components/StatisticsPage"
 
 const App = () => {
   inject(); // Vercel analytics
@@ -60,6 +61,10 @@ const App = () => {
         {
           path: "welcome",
           element: <WelcomePage />
+        },
+        {
+          path: "stats",
+          element: <Statistics />
         }
       ]
     }

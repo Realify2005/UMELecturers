@@ -16,7 +16,7 @@ router.get('/total-comments/:username', async (req, res) => {
 router.get('/all-comments/:username', async (req, res) => {
     try {
         const username = req.params.username;
-        const allComments = await Staff.find({ reviewer: username }, 'name nameHyphened');
+        const allComments = await Staff.find({ reviewer: username }, 'name nameHyphened course rating');
         res.status(200).json({ allComments });
     } catch (error) {
         console.error('Error fetching all comments: ', error);

@@ -1,0 +1,51 @@
+.statistics-page {
+    padding: 1vh 2vw;
+}
+
+.statistics-page .overall-statistics {
+    margin-bottom: 5vh;
+}
+
+.statistics-page .star-icon {
+    height: 2vh;
+    margin-bottom: -0.2vh;
+}
+
+.statistics-page table {
+    margin: 3vh 0;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.statistics-page th, .statistics-page td {
+    padding: 0.5vw;
+    text-align: left;
+}
+
+.statistics-page th {
+    background-color: #a9d6d5;
+    font-size: 2.2vh;
+}
+
+.statistics-page td {
+    font-size: 2vh;
+    border-top: 1px solid #ddd;
+}
+
+.statistics-page td a {
+    text-decoration: none;
+    color: #5c92c5;
+}
+
+.statistics-page td a:hover {
+    color: #3a7aa5;
+}
+
+.statistics-page tr:nth-child(even) {
+    background-color: #d6eeee;
+}
+
+.statistics-page tr:hover {
+    background-color: #ddffdd;
+}

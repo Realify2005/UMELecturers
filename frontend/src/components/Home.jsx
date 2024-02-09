@@ -51,6 +51,7 @@ const Home = () => {
         <div className="home">
             <div className="header">
                 <div className="header-buttons">
+                    <Link className="link-to-stats-page" to="/home/stats">View all existing staffs</Link>
                     <Search />
                     <button onClick={() => navigate('/home/add-staff')}>Add Staff</button>
                 </div>

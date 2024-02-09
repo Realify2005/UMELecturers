@@ -6,6 +6,46 @@
     text-decoration: none;
 }
 
-.user-profile li {
+.user-profile .star-icon {
+    height: 2vh;
+    margin-bottom: -0.2vh;
+}
+
+.user-profile table {
+    margin: 3vh 0;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.user-profile th, .user-profile td {
+    padding: 0.5vw;
+    text-align: left;
+}
+
+.user-profile th {
+    background-color: #9fe6a0;
+    font-size: 2.2vh;
+}
+
+.user-profile td {
     font-size: 2vh;
+    border-top: 1px solid #ddd;
+}
+
+.user-profile td a {
+    text-decoration: none;
+    color: #5ddb5b;
+}
+
+.user-profile td a:hover {
+    color: #3a7e3a;
+}
+
+.user-profile tr:nth-child(even) {
+    background-color: #c7f7c9;
+}
+
+.user-profile tr:hover {
+    background-color: #b3e8b4;
 }

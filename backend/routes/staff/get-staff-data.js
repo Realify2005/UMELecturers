@@ -172,4 +172,52 @@ router.get("/find-by-comment/:commentId", async(req, res) => {
   }
 })
 
+router.get("/staff-statistics", async(req, res) => {
+  try {
+    const staffStatistics = await Staff.aggregate([
+      { 
+        $match: { rating: { $exists: true } }
+      },
+      {
+        $group: {
+          _id: '$name', 
+          nameHyphened: { $first: '$nameHyphened' },
+          course: {$first: '$course'},
+          averageRating: { $avg: "$rating" },
+          count: { $sum: 1}
+        }
+      },
+      {
+        $sort: { averageRating: -1 }
+      },
+      {
+        $project: {
+          _id: 0,
+          name: '$_id',
+          nameHyphened: 1,
+          averageRating: 1,
+          course: 1,
+          count: 1
+        }
+      }
+    ]);
+
+    res.status(200).json(staffStatistics);
+  } catch (error) {
+    console.log('Error fetching staff statistics: ', error);
+    res.status(500).json({ error: 'Error getting tutor data' });
+  }
+})
+
+router.get("/full-statistics", async(req, res) => {
+  try {
+    const fullStatistics = await Staff.find({});
+
+    res.status(200).json(fullStatistics);
+  } catch (error) {
+    console.log('Error fetching full statistics ', error);
+    res.status(500).json({ error: 'Error getting full statistics' });
+  }
+})
+
 module.exports = router;
