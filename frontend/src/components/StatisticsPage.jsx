@@ -7,7 +7,7 @@ import '../styles/statistics-page.css';
 const Statistics = () => {
     const [staffData, setStaffData] = useState([]);
     const [fullData, setFullData] = useState([]);
-    const [sortBy, setSortBy] = useState('rating');
+    const [sortBy, setSortBy] = useState('count');
 
     useEffect(() => {
         const fetchStaffData = async () => {
