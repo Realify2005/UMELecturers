@@ -9,14 +9,16 @@ const AddStaff = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const prefilledStaffName = searchParams.has('staff') ? searchParams.get('staff') : '';
+    const prefilledCourseName = searchParams.has('courseCode') ? searchParams.get('courseCode') : '';
+    const prefilledType = searchParams.has('type') ? searchParams.get('type') : null
 
     const [error, setError] = useState('');
     const [staffData, setStaffData] = useState({
-        type: null,
+        type: prefilledType,
         name: prefilledStaffName,
         nameHyphened: prefilledStaffName.toLowerCase().split(' ').join('-'),
         rating: null,
-        course: '',
+        course: prefilledCourseName,
         year: '',
         review: '',
         reviewer: localStorage.getItem('username')
@@ -48,11 +50,11 @@ const AddStaff = () => {
         try {
             await axios.post(`${import.meta.env.VITE_API_URL}/api/add-staff-data`, staffData);
             setStaffData({
-                type: null,
+                type: prefilledType,
                 name: prefilledStaffName,
                 nameHyphened: prefilledStaffName.toLowerCase().split(' ').join('-'),
                 rating: null,
-                course: '',
+                course: prefilledCourseName,
                 year: '',
                 review: ''
             })

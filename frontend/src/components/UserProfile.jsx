@@ -71,8 +71,8 @@ const UserProfile = () => {
                             {comments.map((comment) => (
                                 <tr key={comment.nameHyphened}>
                                     <td><Link to={`/home/staff/${comment.nameHyphened}`}>{comment.name}</Link></td>
-                                    <td>{comment.rating.toFixed(1)}<img className="star-icon" src={star} alt="star icon" /> / 10</td>
-                                    <td>{comment.course}</td>
+                                    <td>{comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</td>
+                                    <td><Link to={`/home/course/${comment.course}`}>{comment.course}</Link></td>
                                 </tr>
                             ))}
                         </tbody>

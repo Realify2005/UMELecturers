@@ -1,8 +1,8 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
 const session = require("express-session");
 const passport = require("passport");
 const mongoose = require('mongoose');
@@ -15,17 +15,18 @@ const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/auth/login');
-var signupRouter = require('./routes/auth/signup');
-var verifyLoginRouter = require('./routes/verify-login');
-var addStaffRouter = require('./routes/staff/add-staff-data');
-var getStaffDataRouter = require('./routes/staff/get-staff-data');
-var editStaffDataRouter = require('./routes/staff/edit-staff-data');
-var getUserDataRouter = require('./routes/user/get-user-data');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let loginRouter = require('./routes/auth/login');
+let signupRouter = require('./routes/auth/signup');
+let verifyLoginRouter = require('./routes/verify-login');
+let addStaffRouter = require('./routes/staff/add-staff-data');
+let getStaffDataRouter = require('./routes/staff/get-staff-data');
+let editStaffDataRouter = require('./routes/staff/edit-staff-data');
+let getUserDataRouter = require('./routes/user/get-user-data');
+let getCourseDataRouter = require('./routes/course/get-course-data');
 
-var app = express();
+let app = express();
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
@@ -56,6 +57,7 @@ app.use('/api/add-staff-data', addStaffRouter);
 app.use('/api/get-staff-data', getStaffDataRouter)
 app.use('/api/edit-staff-data', editStaffDataRouter);
 app.use('/api/get-user-data', getUserDataRouter)
+app.use('/api/get-course-data', getCourseDataRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

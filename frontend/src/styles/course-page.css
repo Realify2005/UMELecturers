@@ -1,0 +1,55 @@
+.course-page {
+    padding: 1vh 2vw;
+}
+
+.course-page h1 {
+    text-align: center;
+}
+
+.course-page a {
+    text-decoration: none;
+}
+
+.course-page .star-icon {
+    height: 2vh;
+    margin-bottom: -0.2vh;
+}
+
+.course-page table {
+    margin: 3vh 0;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.course-page th, .course-page td {
+    padding: 0.5vw;
+    text-align: left;
+}
+
+.course-page th {
+    background-color: #ffcf87;
+    font-size: 2.2vh;
+}
+
+.course-page td {
+    font-size: 2vh;
+    border-top: 1px solid #ddd;
+}
+
+.course-page td a {
+    text-decoration: none;
+    color: #ff9e54;
+}
+
+.course-page td a:hover {
+    color: #ff7e00;
+}
+
+.course-page tr:nth-child(even) {
+    background-color: #ffe4b3;
+}
+
+.course-page tr:hover {
+    background-color: #ffcc80;
+}

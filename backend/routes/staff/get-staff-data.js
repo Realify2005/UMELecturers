@@ -200,7 +200,7 @@ router.get("/staff-statistics", async(req, res) => {
           count: 1
         }
       }
-    ]);
+  ]);
 
     res.status(200).json(staffStatistics);
   } catch (error) {

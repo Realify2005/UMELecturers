@@ -44,7 +44,6 @@ const StaffPage = () => {
             if (error.response.request.status === 403) {
                 alert("Well you tried, but that comment isn't yours, so you're not allowed to delete it, smh.");
             }
-            // console.error('Error deleting comment: ', error);
         }
     }
 
@@ -108,7 +107,7 @@ const StaffPage = () => {
                 {lecturerComments.slice().reverse().map(comment => (
                     <div key={comment._id} className="comment-box">
                         <div className="left-side">
-                            <p>Course Code: {comment.course}</p>
+                            <p>Course Code: <Link to={`/home/course/${comment.course}`}>{comment.course}</Link></p>
                             <p>Year Taken: {comment.year}</p>
                             <p>Rating: {comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</p>
                             <p>Reviewer: <Link to={`/home/user/${comment.reviewer}`}>{comment.reviewer}</Link></p>
@@ -129,7 +128,7 @@ const StaffPage = () => {
                 {tutorComments.slice().reverse().map(comment => (
                     <div key={comment._id} className="comment-box">
                         <div className="left-side">
-                            <p>Course Code: {comment.course}</p>
+                            <p>Course Code: <Link to={`/home/course/${comment.course}`}>{comment.course}</Link></p>
                             <p>Year Taken: {comment.year}</p>
                             <p>Rating: {comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</p>
                             <p>Reviewer: <Link to={`/home/user/${comment.reviewer}`}>{comment.reviewer}</Link></p>

@@ -78,7 +78,7 @@ const Statistics = () => {
                         <tr key={staff.nameHyphened}>
                             <td><Link to={`/home/staff/${staff.nameHyphened}`}>{staff.name}</Link></td>
                             <td>{staff.averageRating.toFixed(1)}<img className="star-icon" src={star} alt="star icon" /> / 10</td>
-                            <td>{staff.course}</td>
+                            <td><Link to={`/home/course/${staff.course}`}>{staff.course}</Link></td>
                             <td>{staff.count}</td>
                         </tr>
                     ))}

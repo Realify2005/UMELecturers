@@ -13,6 +13,7 @@ import SearchResults from "./components/SearchResults"
 import UserProfile from "./components/UserProfile"
 import WelcomePage from "./components/WelcomePage"
 import Statistics from "./components/StatisticsPage"
+import CoursePage from "./components/CoursePage"
 
 const App = () => {
   inject(); // Vercel analytics
@@ -41,6 +42,10 @@ const App = () => {
         {
           path: "user/:username",
           element: <UserProfile />
+        },
+        {
+          path: "course/:courseCode",
+          element: <CoursePage />
         },
         {
           path: "add-staff",
