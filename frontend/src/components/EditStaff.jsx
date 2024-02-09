@@ -25,7 +25,7 @@ const EditStaff = () => {
                 const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/find-by-comment/${commentId}`);
                 const { type, name, nameHyphened, rating, course, year, review, reviewer } = response.data;
 
-                if (reviewer !== localStorage.getItem('username')) {
+                if ((reviewer !== localStorage.getItem('username')) && (localStorage.getItem('username') !== 'admin')) {
                     setError('You are unauthorized to edit this comment');
                 }
 

@@ -11,7 +11,7 @@ router.delete('/delete-comment', async (req, res) => {
             return res.status(404).json({ error: 'Comment not found' });
         }
 
-        if (comment.reviewer !== username) {
+        if ((comment.reviewer !== username) && (username !== 'admin')) {
             return res.status(403).json({ error: 'Unauthorized to delete' });
         }
 

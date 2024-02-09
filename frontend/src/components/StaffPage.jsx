@@ -41,6 +41,9 @@ const StaffPage = () => {
             setTutorComments(prevComments => prevComments.filter(comment => comment._id !== commentId));
             
         } catch (error) {
+            if (error.response.request.status === 403) {
+                alert("Well you tried, but that comment isn't yours, so you're not allowed to delete it, smh.");
+            }
             // console.error('Error deleting comment: ', error);
         }
     }
@@ -110,7 +113,7 @@ const StaffPage = () => {
                             <p>Rating: {comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</p>
                             <p>Reviewer: <Link to={`/home/user/${comment.reviewer}`}>{comment.reviewer}</Link></p>
                             <p className="comment-review">{comment.review}</p>
-                            {comment.reviewer === username && (
+                            {(comment.reviewer === username || username === 'admin') && (
                                 <>
                                     <button onClick={() => handleEdit(comment._id)}>Edit</button>
                                     <button onClick={() => handleDelete(comment._id)}>Delete</button>
@@ -131,7 +134,7 @@ const StaffPage = () => {
                             <p>Rating: {comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</p>
                             <p>Reviewer: <Link to={`/home/user/${comment.reviewer}`}>{comment.reviewer}</Link></p>
                             <p className="comment-review">{comment.review}</p>
-                            {comment.reviewer === username && (
+                            {(comment.reviewer === username || username === 'admin') && (
                                 <>
                                     <button onClick={() => handleEdit(comment._id)}>Edit</button>
                                     <button onClick={() => handleDelete(comment._id)}>Delete</button>

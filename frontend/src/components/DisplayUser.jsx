@@ -24,8 +24,10 @@ const UserProfile = () => {
     return (
         <div className="user-profile">
             <h2>{username}'s active comments:</h2>
-            {comments.length === 0 ? (
-            <p>Looks like you have no active comments at the moment. You can add one by clicking <Link to="/home/add-staff">here</Link>, though!</p>
+            {comments.length === 0 && localStorage.getItem('username') === username ? (
+                <p>Looks like you have no active comments at the moment. You can add one by clicking <Link to="/home/add-staff">here</Link>, though!</p>
+            ) : comments.length === 0 && localStorage.getItem('username') !== username ? (
+                <p>This user has no active comments.</p>
             ) : (
                 <ul>
                     {comments.map(comment => (
@@ -36,7 +38,7 @@ const UserProfile = () => {
                 </ul>
             )}
         </div>
-    );
+     );
 };
 
 export default UserProfile;

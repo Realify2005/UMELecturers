@@ -38,3 +38,8 @@
     gap: 1vw;
     margin-top: 1vh;
 }
+
+.unauthorized-error-page {
+    display: flex;
+    flex-direction: column;
+}
