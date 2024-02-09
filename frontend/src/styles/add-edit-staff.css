@@ -19,6 +19,17 @@
     align-items: center;
 }
 
+.add-staff-form textarea, .edit-staff-form textarea {
+    width: 15vw;
+    height: 15vh;
+}
+
+@media (max-width: 600px) {
+    .add-staff-form div textarea, .edit-staff-form div textarea {
+        width: 100%;
+    }
+}
+
 .add-staff-form button[type="submit"], .edit-staff button {
     padding: 0.5rem 1rem;
     background-color: #007bff;

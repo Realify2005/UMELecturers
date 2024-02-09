@@ -119,7 +119,7 @@ const EditStaff = () => {
                         </div>
                         <div>
                             <label>Review:</label>
-                            <textarea name="review" value={staffData.review} onChange={handleChange} style={{ width: '15vw', height: '15vh' }} required />
+                            <textarea name="review" value={staffData.review} onChange={handleChange} required />
                         </div>
                     </form>
                     <div className="buttons">
