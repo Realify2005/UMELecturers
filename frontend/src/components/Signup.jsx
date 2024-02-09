@@ -20,6 +20,14 @@ const Signup = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const statusMessage = searchParams.get('status');
+    if (statusMessage === 'Unauthorized') {
+        setError('An account is required to create staff pages')
+    }
+}, []);
+
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };

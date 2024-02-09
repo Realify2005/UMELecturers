@@ -7,6 +7,15 @@ const AddStaff = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
+    const username = localStorage.getItem('username');
+
+    useEffect(() => {
+        if (username === 'guest') {
+            navigate('/signup?status=Unauthorized');
+        }
+    })
+
+
     const searchParams = new URLSearchParams(location.search);
     const prefilledStaffName = searchParams.has('staff') ? searchParams.get('staff') : '';
     const prefilledCourseName = searchParams.has('courseCode') ? searchParams.get('courseCode') : '';
