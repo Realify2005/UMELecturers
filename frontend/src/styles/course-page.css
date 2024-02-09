@@ -28,7 +28,7 @@
 }
 
 .course-page th {
-    background-color: #ffcf87;
+    background-color: #ffae5c;
     font-size: 2.2vh;
 }
 
@@ -39,17 +39,17 @@
 
 .course-page td a {
     text-decoration: none;
-    color: #ff9e54;
-}
-
-.course-page td a:hover {
     color: #ff7e00;
 }
 
+.course-page td a:hover {
+    color: #e65300;
+}
+
 .course-page tr:nth-child(even) {
-    background-color: #ffe4b3;
+    background-color: hsl(34, 80%, 93%);
 }
 
 .course-page tr:hover {
-    background-color: #ffcc80;
+    background-color: hsl(34, 80%, 89%);
 }

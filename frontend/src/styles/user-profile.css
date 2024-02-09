@@ -24,7 +24,7 @@
 }
 
 .user-profile th {
-    background-color: #9fe6a0;
+    background-color: #b3e6b0;
     font-size: 2.2vh;
 }
 
@@ -35,17 +35,17 @@
 
 .user-profile td a {
     text-decoration: none;
-    color: #5ddb5b;
+    color: #4ca94c;
 }
 
 .user-profile td a:hover {
-    color: #3a7e3a;
+    color: #2e6e2e;
 }
 
 .user-profile tr:nth-child(even) {
-    background-color: #c7f7c9;
+    background-color: #d5fcd8;
 }
 
 .user-profile tr:hover {
-    background-color: #b3e8b4;
+    background-color: #bce8bc;
 }
