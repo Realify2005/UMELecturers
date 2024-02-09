@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/staff-page.css';
 import star from '../assets/star.png';
@@ -108,7 +108,7 @@ const StaffPage = () => {
                             <p>Course Code: {comment.course}</p>
                             <p>Year Taken: {comment.year}</p>
                             <p>Rating: {comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</p>
-                            <p>Reviewer: {comment.reviewer}</p>
+                            <p>Reviewer: <Link to={`/home/user/${comment.reviewer}`}>{comment.reviewer}</Link></p>
                             <p className="comment-review">{comment.review}</p>
                             {comment.reviewer === username && (
                                 <>
@@ -129,7 +129,7 @@ const StaffPage = () => {
                             <p>Course Code: {comment.course}</p>
                             <p>Year Taken: {comment.year}</p>
                             <p>Rating: {comment.rating}<img className="star-icon" src={star} alt="star icon" /> / 10</p>
-                            <p>Reviewer: {comment.reviewer}</p>
+                            <p>Reviewer: <Link to={`/home/user/${comment.reviewer}`}>{comment.reviewer}</Link></p>
                             <p className="comment-review">{comment.review}</p>
                             {comment.reviewer === username && (
                                 <>

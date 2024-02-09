@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import '../styles/display-about.css'
+import '../styles/user-profile.css'
 
-const DisplayAbout = () => {
+const UserProfile = () => {
     const { username } = useParams();
     const [comments, setComments] = useState([]);
 
@@ -22,7 +22,7 @@ const DisplayAbout = () => {
     }, [username]);
 
     return (
-        <div className="display-about">
+        <div className="user-profile">
             <h2>{username}'s active comments:</h2>
             {comments.length === 0 ? (
             <p>Looks like you have no active comments at the moment. You can add one by clicking <Link to="/home/add-staff">here</Link>, though!</p>
@@ -39,4 +39,4 @@ const DisplayAbout = () => {
     );
 };
 
-export default DisplayAbout;
+export default UserProfile;

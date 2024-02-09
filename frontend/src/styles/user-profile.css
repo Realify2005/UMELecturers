@@ -1,11 +1,11 @@
-.display-about {
+.user-profile {
     padding: 1vh 2vw;
 }
 
-.display-about a {
+.user-profile a {
     text-decoration: none;
 }
 
-.display-about li {
+.user-profile li {
     font-size: 2vh;
 }

@@ -88,6 +88,7 @@ const EditStaff = () => {
                                 <option value="tutor">Tutor</option>
                             </select>
                         </div>
+                        <small>* Lab Demonstrator should be counted as Tutor</small>
                         <div>
                             <label>Full name:</label>
                             <input type="text" name="name" value={staffData.name} onChange={handleChange} placeholder="e.g. Alistair Moffat" disabled required />

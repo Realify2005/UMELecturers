@@ -56,7 +56,7 @@ const Home = () => {
                 </div>
                 <div className="profile">
                     {user && <h2>Hello, {user}</h2>}
-                    <p>You have <Link to={`/home/about/${user}`}>{totalRatings} active ratings</Link></p>
+                    <p>You have <Link to={`/home/user/${user}`}>{totalRatings} active ratings</Link></p>
                     <button onClick={() => navigate('/logout')}>Log out</button>
                 </div>
             </div>

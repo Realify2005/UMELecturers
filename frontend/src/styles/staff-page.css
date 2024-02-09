@@ -37,6 +37,10 @@
     word-wrap: break-word;
 }
 
+.comment-box a {
+    text-decoration: none;
+}
+
 .comment-box button {
     margin-right: 10px;
     background-color: #4caf50;

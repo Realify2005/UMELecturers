@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { inject } from '@vercel/analytics';
 import Login from './components/Login'
 import Logout from "./components/Logout"
 import Signup from "./components/Signup"
@@ -9,10 +10,11 @@ import EditStaff from "./components/EditStaff"
 import StaffPage from "./components/StaffPage"
 import ErrorPage from "./components/ErrorPage"
 import SearchResults from "./components/SearchResults"
-import DisplayAbout from "./components/DisplayAbout"
+import UserProfile from "./components/DisplayUser"
 import WelcomePage from "./components/WelcomePage"
 
 const App = () => {
+  inject(); // Vercel analytics
   const router = createBrowserRouter([
     {
       path: "/",
@@ -36,8 +38,8 @@ const App = () => {
       element: <Home />,
       children: [
         {
-          path: "about/:username",
-          element: <DisplayAbout />
+          path: "user/:username",
+          element: <UserProfile />
         },
         {
           path: "add-staff",
