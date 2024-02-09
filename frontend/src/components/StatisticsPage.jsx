@@ -13,6 +13,7 @@ const Statistics = () => {
         const fetchStaffData = async () => {
             try {
                 const staffDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/staff-statistics`);
+                staffDataResponse.sort((a, b) => b.count - a.count); // Sort by default count
                 setStaffData(staffDataResponse.data);
 
                 const fullDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/full-statistics`);
