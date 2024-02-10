@@ -1,20 +1,20 @@
-.sidebar {
+aside {
     background-color: lightgreen;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
     padding: 0 2vw;
 }
 
-.sidebar .star-icon {
+aside .star-icon {
     height: 2.2vh;
     margin-bottom: -0.2vh;
 }
 
-.sidebar h1 {
+aside h1 {
     margin-bottom: 1vh;
 }
 
-.sidebar a {
+aside a {
     text-decoration: none;
     color: hsl(326, 60%, 68%);
 }

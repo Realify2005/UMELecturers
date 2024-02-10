@@ -49,7 +49,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            <div className="header">
+            <header>
                 <div className="header-buttons">
                     <Link className="link-to-stats-page" to="/home/stats">View all existing staffs</Link>
                     <Search />
@@ -60,7 +60,7 @@ const Home = () => {
                     <p>You have <Link to={`/home/user/${user}`}>{totalRatings} active ratings</Link></p>
                     <button onClick={() => navigate('/logout')}>Log out</button>
                 </div>
-            </div>
+            </header>
             <div className="main-content">
                 <Outlet />
             </div>

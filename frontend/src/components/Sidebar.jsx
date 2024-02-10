@@ -46,7 +46,7 @@ const Sidebar = () => {
     }, []);
 
     return (
-        <div className="sidebar">
+        <aside>
             {loading ? (
                 <p>Loading...</p>
             ) : (
@@ -111,7 +111,7 @@ const Sidebar = () => {
                     <p>Data updates every 60 seconds</p>
                 </>
             )}
-        </div>
+        </aside>
     );
 };
 

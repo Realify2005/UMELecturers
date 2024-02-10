@@ -13,7 +13,7 @@
     }
 }
 
-.header {
+header {
     grid-column: 1 / 3;
     grid-row: 1 / 2;
     padding: 2vh 2vw;
@@ -23,7 +23,7 @@
     position: relative;
 }
 
-.header .header-buttons {
+header .header-buttons {
     display: grid;
     grid-auto-flow: column;
     justify-content: center;
@@ -33,7 +33,7 @@
 }
 
 @media (max-width: 600px) {
-    .header .header-buttons {
+    header .header-buttons {
         padding-left: 0;
         display: flex;
         flex-direction: column;
@@ -41,47 +41,47 @@
     }
 }
 
-.header .header-buttons .link-to-stats-page {
+header .header-buttons .link-to-stats-page {
     position: absolute;
     top: 40%;
     left: 5%;
 }
 
 
-.header .header-buttons form {
+header .header-buttons form {
     display: grid;
     grid-auto-flow: column;
     gap: 0.5vw;
 }
 
-.header .header-buttons form input {
+header .header-buttons form input {
     width: 15vw;
     height: 2.5vh;
     border-radius: 10px;
 }
 
 @media (max-width: 600px) {
-    .header .header-buttons .link-to-stats-page {
+    header .header-buttons .link-to-stats-page {
         position: static;
     }
 
-    .header .header-buttons form input {
+    header .header-buttons form input {
         width: 35vw;
     }
 }
 
-.header .profile {
+header .profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
 
-.header .profile h2 {
+header .profile h2 {
     margin: 0;
 }
 
-.header .profile p {
+header .profile p {
     margin: 0;
 }
 
