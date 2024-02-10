@@ -1,3 +1,7 @@
+.no-staff-data {
+    padding: 1vh 2vw;
+}
+
 .staff-page {
     display: flex;
     flex-direction: column;

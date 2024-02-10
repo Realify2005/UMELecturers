@@ -6,13 +6,13 @@ import star from '../assets/star.png';
 
 const StaffPage = () => {
     const staffName = useRef(null);
+    const username = useState((localStorage.getItem('username')));
     const { staffNameHyphened } = useParams();
     const navigate = useNavigate();
     const [lecturerComments, setLecturerComments] = useState([]);
     const [tutorComments, setTutorComments] = useState([]);
     const [lecturerRating, setLecturerRating] = useState(null);
     const [tutorRating, setTutorRating] = useState(null);
-    const [username, setUsername] = useState(localStorage.getItem('username'));
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
