@@ -9,7 +9,9 @@ import Search from './Search';
 const Home = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const [error, setError] = useState(null);
     const [totalRatings, setTotalRatings] = useState(0);
+    const username = localStorage.getItem('username');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,8 +26,6 @@ const Home = () => {
                 await axios.get(`${import.meta.env.VITE_API_URL}/api/verify-login`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-
-                const username = localStorage.getItem('username');
 
                 setUser(username);
                 fetchTotalRatings();
@@ -45,7 +45,16 @@ const Home = () => {
         }
 
         fetchData();
-    }, [user, totalRatings, navigate]);
+    }, [user, totalRatings, username, navigate]);
+
+    const handleClick = () => {
+        if (username === 'guest') {
+            setError(<>You must <Link to="/signup">sign up</Link> to add staff</>)
+        }
+        else {
+            navigate('/home/add-staff');
+        }
+    }
 
     return (
         <div className="home">
@@ -53,7 +62,8 @@ const Home = () => {
                 <div className="header-buttons">
                     <Link className="link-to-stats-page" to="/home/stats">View all existing staffs</Link>
                     <Search />
-                    <button onClick={() => navigate('/home/add-staff')}>Add Staff</button>
+                    <button onClick={handleClick}>Add Staff</button>
+                    <p id="error">{error}</p>
                 </div>
                 <div className="profile">
                     {user && <h2>Hello, {user}</h2>}

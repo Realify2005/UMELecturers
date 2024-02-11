@@ -60,6 +60,11 @@ header .header-buttons form input {
     border-radius: 10px;
 }
 
+header .header-buttons #error {
+    margin: 0;
+    color: red;
+}
+
 @media (max-width: 600px) {
     header .header-buttons .link-to-stats-page {
         position: static;
