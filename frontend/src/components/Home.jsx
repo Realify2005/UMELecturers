@@ -50,6 +50,9 @@ const Home = () => {
     const handleClick = () => {
         if (username === 'guest') {
             setError(<>Error: You must <Link to="/signup">sign up</Link> to add staff</>)
+            setTimeout(() => {
+                setError(null);
+            }, 3000); // Make error message disappear after 3 seconds cooldown
         }
         else {
             navigate('/home/add-staff');
