@@ -48,6 +48,7 @@ const StaffPage = () => {
     }
 
     useEffect(() => {
+        setError(null);
         const fetchStaffData = async () => {
             try {
                 const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/staff-data/staff-page`, {staffNameHyphened: staffNameHyphened});
