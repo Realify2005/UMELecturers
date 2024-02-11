@@ -5,9 +5,11 @@ import star from '../assets/star.png';
 import '../styles/statistics-page.css';
 
 const Statistics = () => {
+    const [originalStaffData, setOriginalStaffData] = useState([])
     const [staffData, setStaffData] = useState([]);
     const [fullData, setFullData] = useState([]);
     const [sortBy, setSortBy] = useState('count');
+    const [searchSubject, setSearchSubject] = useState('')
 
     useEffect(() => {
         const fetchStaffData = async () => {
@@ -15,6 +17,7 @@ const Statistics = () => {
                 const staffDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/staff-statistics`);
                 const sortedStaffData = staffDataResponse.data.sort((a, b) => b.count - a.count); // Sort by default count
                 setStaffData(sortedStaffData);
+                setOriginalStaffData(sortedStaffData);
 
                 const fullDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/full-statistics`);
                 setFullData(fullDataResponse.data);
@@ -47,23 +50,35 @@ const Statistics = () => {
         setStaffData(sortedData);
     }
 
+    const handleSearch = (e) => {
+        setSearchSubject(e.target.value);
+        const filteredData = originalStaffData.filter(staff => staff.course.toLowerCase().includes(e.target.value.toLowerCase()));
+        setStaffData(filteredData);
+    }
+
     return (
         <div className="statistics-page">
             <div className="overall-statistics">
                 <h1>Website Statistics:</h1>
                 <ul>
-                    <li>This website holds a total of <strong>{staffData.length}</strong> unique staff pages.</li>
+                    <li>This website holds a total of <strong>{originalStaffData.length}</strong> unique staff pages.</li>
                     <li>A whopping count of <strong>{fullData.length}</strong> ratings across all staffs have been placed. </li>
                 </ul>
             </div>
-            <div>
-                Sort by:{' '}
-                <select value={sortBy} onChange={(e) => {setSortBy(e.target.value); sortStaffData(e.target.value);}}>
-                    <option value="rating">Rating</option>
-                    <option value="alphabetical">Alphabetical Order</option>
-                    <option value="course">Course</option>
-                    <option value="count">Popularity</option>
-                </select>   
+            <div className="sort-filter-bar">
+                <div className="sort-bar">
+                    Sort by:{' '}
+                    <select value={sortBy} onChange={(e) => {setSortBy(e.target.value); sortStaffData(e.target.value);}}>
+                        <option value="rating">Rating</option>
+                        <option value="alphabetical">Alphabetical Order</option>
+                        <option value="course">Course</option>
+                        <option value="count">Popularity</option>
+                    </select>   
+                </div>
+                <div className="filter-bar">
+                    Search for courses:{' '}
+                    <input type="text" placeholder="e.g. COMP10001" value={searchSubject} onChange={handleSearch} />
+                </div>
             </div>
             <table>
                 <thead>

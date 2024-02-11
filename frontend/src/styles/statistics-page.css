@@ -2,6 +2,11 @@
     padding: 1vh 2vw;
 }
 
+.statistics-page .sort-filter-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
 .statistics-page .overall-statistics {
     margin-bottom: 5vh;
 }
