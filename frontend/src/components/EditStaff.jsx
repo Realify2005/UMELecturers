@@ -22,7 +22,7 @@ const EditStaff = () => {
     useEffect(() => {
         const fetchStaffData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/find-by-comment/${commentId}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/find-by-comment/${commentId}`);
                 const { type, name, nameHyphened, rating, course, year, review, reviewer } = response.data;
 
                 if ((reviewer !== localStorage.getItem('username')) && (localStorage.getItem('username') !== 'admin')) {
@@ -62,7 +62,7 @@ const EditStaff = () => {
 
     const handleConfirm = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/edit-staff-data/edit-comment/${commentId}`, staffData);
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/staff-data/edit-comment/${commentId}`, staffData);
             navigate(`/home/staff/${staffData.nameHyphened}`);
         } catch (error) {
             // console.log('Failed to edit staff: ', error);

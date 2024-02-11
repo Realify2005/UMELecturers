@@ -1,5 +1,5 @@
 const express = require('express');
-const Staff = require('../../models/Staff');
+const Staff = require('../models/Staff');
 const router = express.Router();
 
 router.get('/total-comments/:username', async (req, res) => {

@@ -15,19 +15,19 @@ const Sidebar = () => {
         const fetchData = async () => {
             try {
                 // Fetch most popular lecturer
-                const mostRatedLecturersResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/most-rated-lecturers`);
+                const mostRatedLecturersResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/most-rated-lecturers`);
                 setMostRatedLecturers(mostRatedLecturersResponse.data);
 
                 // Fetch most popular tutor
-                const mostRatedTutorsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/most-rated-tutors`);
+                const mostRatedTutorsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/most-rated-tutors`);
                 setMostRatedTutors(mostRatedTutorsResponse.data);
 
                 // Fetch highest rated lecturer
-                const highestRatedLecturersResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/highest-rated-lecturers`);
+                const highestRatedLecturersResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/highest-rated-lecturers`);
                 setHighestRatedLecturers(highestRatedLecturersResponse.data);
 
                 // Fetch highest rated tutor
-                const highestRatedTutorsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/highest-rated-tutors`);
+                const highestRatedTutorsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/highest-rated-tutors`);
                 setHighestRatedTutors(highestRatedTutorsResponse.data);
 
                 setLoading(false); // Set loading to false when data is fetched

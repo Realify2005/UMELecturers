@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Staff = require('../../models/Staff');
+const Staff = require('../models/Staff');
 
-// Placeholder route handler
+// GET staff data
+
 router.get('/highest-rated-lecturers', async (req, res) => {
   try {
     const highestRatedLecturers = await Staff.aggregate([
@@ -217,6 +218,77 @@ router.get("/full-statistics", async(req, res) => {
   } catch (error) {
     console.log('Error fetching full statistics ', error);
     res.status(500).json({ error: 'Error getting full statistics' });
+  }
+})
+
+// ADD staff data
+
+router.post('/', async (req, res) => {
+  console.log(req.body);
+  const { type, name, nameHyphened, rating, course, year, review, reviewer } = req.body;
+  
+  try {
+      // Check if user has already commented
+      const existingComment = await Staff.findOne({ nameHyphened, reviewer });
+      if (existingComment) {
+          return res.status(400).json({ result: "Unauthorized", message: 'You have already commented on this staff. Please edit or delete your original comment' })
+      }
+
+      // Create new staff data
+      const currentDate = new Date();
+      const newStaff = new Staff({ type, name, nameHyphened, rating, course, year, review, reviewer, createdAt: currentDate });
+      await newStaff.save();
+
+      // Respond with success
+      return res.status(201).json({ result: "Successful", message: 'Staff added successfully.', staff: newStaff });
+  } catch (error) {
+      console.error('Add staff failed:', error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// EDIT staff data
+
+router.delete('/delete-comment', async (req, res) => {
+  try {
+      const {commentId, username} = req.body;
+
+      const comment = await Staff.findById(commentId);
+      if (!comment) {
+          return res.status(404).json({ error: 'Comment not found' });
+      }
+
+      if ((comment.reviewer !== username) && (username !== 'admin')) {
+          return res.status(403).json({ error: 'Unauthorized to delete' });
+      }
+
+      await Staff.findByIdAndDelete(commentId);
+      res.status(200).json({ message: 'Comment Deleted Successfully' });
+  } catch (error) {
+      console.error('Error deleting comment: ', error);
+      res.status(500).json({ error: 'Internal Server Error' })
+  }
+}) 
+
+router.post('/edit-comment/:commentId', async (req, res) => {
+  try {
+      const commentId = req.params.commentId;
+      const newStaffData = req.body;
+
+      const staffData = await Staff.findById(commentId);
+
+      if (!staffData) {
+          return res.status(404).json({ error: 'No staff with that comment Id' });
+      }
+
+      staffData.set(newStaffData);
+
+      await staffData.save();
+
+      res.status(200).json({ message: 'Successfully edited staff comment' });
+  } catch (error) {
+      console.error('Error updating staff data: ', error);
+      res.status(500).json({ error: 'An unexpected error has occured while editing staff data' });
   }
 })
 

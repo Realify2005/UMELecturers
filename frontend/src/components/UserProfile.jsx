@@ -12,8 +12,7 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-user-data/all-comments/${username}`);
-                console.log(response.data);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user-data/all-comments/${username}`);
                 const sortedComments = response.data.allComments.sort((a, b) => a.name.localeCompare(b.name));
                 setComments(sortedComments);
             } catch (error) {

@@ -15,7 +15,7 @@ const SearchResults = () => {
                 const searchParams = new URLSearchParams(location.search);
                 const query = searchParams.get('query');
                 setQuery(query);
-                const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/get-staff-data/search-staff`, { searchTerm: query });
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/staff-data/search-staff`, { searchTerm: query });
                 setSearchResults(response.data);
                 setLoading(false);
             } catch (error) {

@@ -13,7 +13,7 @@ const CoursePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-course-data/${courseCode.toUpperCase()}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/course-data/${courseCode.toUpperCase()}`);
                 setLecturers(response.data.lecturers);
                 setTutors(response.data.tutors);
             } catch (error) {

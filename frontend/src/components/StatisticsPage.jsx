@@ -12,11 +12,11 @@ const Statistics = () => {
     useEffect(() => {
         const fetchStaffData = async () => {
             try {
-                const staffDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/staff-statistics`);
+                const staffDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/staff-statistics`);
                 const sortedStaffData = staffDataResponse.data.sort((a, b) => b.count - a.count); // Sort by default count
                 setStaffData(sortedStaffData);
 
-                const fullDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-staff-data/full-statistics`);
+                const fullDataResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/staff-data/full-statistics`);
                 setFullData(fullDataResponse.data);
             } catch (error) {
                 console.error('Error fetching staff data: ', error);

@@ -6,7 +6,7 @@ import star from '../assets/star.png';
 
 const StaffPage = () => {
     const staffName = useRef(null);
-    const username = useState((localStorage.getItem('username')));
+    const username = localStorage.getItem('username');
     const { staffNameHyphened } = useParams();
     const navigate = useNavigate();
     const [lecturerComments, setLecturerComments] = useState([]);
@@ -33,7 +33,7 @@ const StaffPage = () => {
             const confirmDelete = window.confirm('Are you sure you want to delete this comment?');
             if (!confirmDelete) return;
 
-            await axios.delete(`${import.meta.env.VITE_API_URL}/api/edit-staff-data/delete-comment`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/api/staff-data/delete-comment`, {
                 data: { commentId: commentId, username: username }
             });
 
@@ -50,7 +50,7 @@ const StaffPage = () => {
     useEffect(() => {
         const fetchStaffData = async () => {
             try {
-                const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/get-staff-data/staff-page`, {staffNameHyphened: staffNameHyphened});
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/staff-data/staff-page`, {staffNameHyphened: staffNameHyphened});
                 staffName.current = response.data[0].name;
                 
                 const convertedData = response.data.map(comment => ({

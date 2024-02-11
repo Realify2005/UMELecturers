@@ -20,11 +20,9 @@ let usersRouter = require('./routes/users');
 let loginRouter = require('./routes/auth/login');
 let signupRouter = require('./routes/auth/signup');
 let verifyLoginRouter = require('./routes/verify-login');
-let addStaffRouter = require('./routes/staff/add-staff-data');
-let getStaffDataRouter = require('./routes/staff/get-staff-data');
-let editStaffDataRouter = require('./routes/staff/edit-staff-data');
-let getUserDataRouter = require('./routes/user/get-user-data');
-let getCourseDataRouter = require('./routes/course/get-course-data');
+let StaffRouter = require('./routes/staff-data');
+let UserDataRouter = require('./routes/user-data');
+let CourseDataRouter = require('./routes/course-data');
 
 let app = express();
 
@@ -53,11 +51,9 @@ app.use('/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/verify-login', verifyLoginRouter);
-app.use('/api/add-staff-data', addStaffRouter);
-app.use('/api/get-staff-data', getStaffDataRouter)
-app.use('/api/edit-staff-data', editStaffDataRouter);
-app.use('/api/get-user-data', getUserDataRouter)
-app.use('/api/get-course-data', getCourseDataRouter);
+app.use('/api/staff-data', StaffRouter);
+app.use('/api/user-data', UserDataRouter)
+app.use('/api/course-data', CourseDataRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

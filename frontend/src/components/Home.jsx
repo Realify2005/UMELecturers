@@ -37,7 +37,7 @@ const Home = () => {
 
         const fetchTotalRatings = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/get-user-data/total-comments/${user}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user-data/total-comments/${user}`);
                 setTotalRatings(response.data.totalComments);
             } catch (error) {
                 console.error('Failed to fetch total comments: ', error);

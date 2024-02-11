@@ -57,7 +57,7 @@ const AddStaff = () => {
             return; // Prevent form submission if type or rating is not selected
         }
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/add-staff-data`, staffData);
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/staff-data`, staffData);
             setStaffData({
                 type: prefilledType,
                 name: prefilledStaffName,
