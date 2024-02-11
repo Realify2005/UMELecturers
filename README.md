@@ -25,10 +25,10 @@ UMELecturers is a web application mainly targeted for University of Melbourne st
 ## Demo
 
 ![image](https://github.com/Realify2005/UMELecturers/assets/142649232/73e92430-4452-43d2-8761-e7252bbad8b4)
-Caption: An example of a staff page
+An example of a staff page
 
 ![image](https://github.com/Realify2005/UMELecturers/assets/142649232/56313211-ef84-40c7-a5ff-1018b37394ad)
-Caption: Page that lists all staffs listed on the website
+Page that lists all staffs listed on the website
 
 
 ## Installation
