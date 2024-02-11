@@ -49,7 +49,7 @@ const Home = () => {
 
     const handleClick = () => {
         if (username === 'guest') {
-            setError(<>You must <Link to="/signup">sign up</Link> to add staff</>)
+            setError(<>Error: You must <Link to="/signup">sign up</Link> to add staff</>)
         }
         else {
             navigate('/home/add-staff');
