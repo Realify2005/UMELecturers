@@ -82,6 +82,7 @@ const Login = () => {
             </form>
             <button className="guest-login" onClick={handleGuestLogin}>Login as Guest</button>
             <p>Don't have an account? <Link to='/signup'>Sign up</Link> instead!</p>
+            <p className="no-login">* <strong>IMPORTANT: Login is currently not possible</strong> as backend is no longer being paid for. Screenshots of the site can be found in the <a href="https://github.com/Realify2005/UMELecturers">github repository</a>.</p>
         </div>
     )
 }

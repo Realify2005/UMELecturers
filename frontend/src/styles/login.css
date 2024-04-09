@@ -75,3 +75,10 @@
     color: green;
     margin-top: 10px;
 }
+
+.no-login {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 25px;    
+}
